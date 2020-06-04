@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:instagramxflutter/helper/responsive/size_config.dart';
 import 'package:instagramxflutter/screen/home_page/home_page.dart';
 import 'package:instagramxflutter/widgets/route_animation.dart';
 
@@ -20,7 +19,6 @@ class _SplashScreenState extends State<SplashScreen> {
 
   @override
   Widget build(BuildContext context) {
-    SizeConfig().init(context);
     var screenSize = MediaQuery.of(context).size;
     return Scaffold(
       body: Container(
@@ -31,14 +29,14 @@ class _SplashScreenState extends State<SplashScreen> {
           children: <Widget>[
             Image.asset(
               "assets/images/logo.png",
-              width: SizeConfig.dataWidth * 55,
-              height: SizeConfig.dataWidth * 55,
+              width: screenSize.width * 0.7,
+              height: screenSize.width * 0.7,
             ),
-            SizedBox(height: SizeConfig.dataHeight * 0.1),
+            SizedBox(height: screenSize.width * 0.01),
             Text(
               "Instagram",
               style: TextStyle(
-                  fontSize: SizeConfig.dataWidth * 6,
+                  fontSize: screenSize.width * 0.08,
                   fontFamily: "vegan",
                   letterSpacing: 1.5),
             ),

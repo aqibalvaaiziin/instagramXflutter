@@ -8,17 +8,28 @@ dataStory(BuildContext context) {
     scrollDirection: Axis.horizontal,
     itemCount: DataStory.dataStory.length,
     itemBuilder: (context, i) => Container(
-      width: screenSize.width * 0.2,
-      height: screenSize.width * 0.2,
-      decoration: BoxDecoration(
-        shape: BoxShape.circle,
-        image: DecorationImage(
-          fit: BoxFit.cover,
-          image: AssetImage(
-            DataStory.dataStory[i]['image'],
-          ),
-        ),
+      margin: EdgeInsets.symmetric(
+        horizontal: screenSize.width * 0.025,
+        vertical: screenSize.width * 0.01,
       ),
+      width: screenSize.width * 0.17,
+      height: screenSize.width * 0.17,
+      decoration: BoxDecoration(
+          shape: BoxShape.circle,
+          image: DecorationImage(
+            fit: BoxFit.fill,
+            image: AssetImage(
+              DataStory.dataStory[i]['image'],
+            ),
+          ),
+          boxShadow: [
+            BoxShadow(
+              color: Color(0xffd6d6d6).withOpacity(0.4),
+              spreadRadius: 0.4,
+              blurRadius: 1,
+              offset: Offset(0, 1),
+            ),
+          ]),
     ),
   );
 }
@@ -30,9 +41,10 @@ datafeet(BuildContext context) {
       itemCount: DataFeet.dataFeet.length,
       itemBuilder: (context, i) {
         return Container(
-          margin: EdgeInsets.symmetric(
-            vertical: screenSize.height * 0.02,
-            horizontal: screenSize.width * 0.05,
+          margin: EdgeInsets.only(
+            bottom: screenSize.height * 0.014,
+            left: screenSize.width * 0.05,
+            right: screenSize.width * 0.05,
           ),
           padding: EdgeInsets.symmetric(
             vertical: 0,
@@ -56,13 +68,18 @@ datafeet(BuildContext context) {
                       child: Row(
                         children: <Widget>[
                           Container(
-                            width: screenSize.width * 0.15,
-                            height: screenSize.width * 0.15,
-                            child: Image.asset(
-                              DataFeet.dataFeet[i]['image'],
-                              fit: BoxFit.cover,
-                            ),
+                            width: screenSize.width * 0.11,
+                            height: screenSize.width * 0.11,
+                            decoration: BoxDecoration(
+                                shape: BoxShape.circle,
+                                image: DecorationImage(
+                                  image: AssetImage(
+                                    DataFeet.dataFeet[i]['avatar'],
+                                  ),
+                                  fit: BoxFit.cover,
+                                )),
                           ),
+                          SizedBox(width: screenSize.width * 0.03),
                           Container(
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.center,
@@ -102,11 +119,13 @@ datafeet(BuildContext context) {
                 width: screenSize.width,
                 height: screenSize.height * 0.4,
                 decoration: BoxDecoration(
-                    color: Colors.red,
                     borderRadius: BorderRadius.all(Radius.circular(15))),
                 child: ClipRRect(
                   borderRadius: BorderRadius.all(Radius.circular(15)),
-                  child: Image.asset(DataFeet.dataFeet[i]['image']),
+                  child: Image.asset(
+                    DataFeet.dataFeet[i]['image'],
+                    fit: BoxFit.cover,
+                  ),
                 ),
               ),
               Container(
@@ -117,19 +136,27 @@ datafeet(BuildContext context) {
                   children: <Widget>[
                     Container(
                       child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.center,
                         children: <Widget>[
                           IconButton(
                             icon: Icon(
-                              Icons.favorite_border,
-                              color: Colors.black,
+                              i % 2 == 1
+                                  ? Icons.favorite_border
+                                  : Icons.favorite,
+                              color: i % 2 == 1 ? Colors.black : Colors.red,
                               size: screenSize.width * 0.07,
                             ),
                             onPressed: () {},
                           ),
+                          SizedBox(width: screenSize.width * 0.01),
                           Text(
                             DataFeet.dataFeet[i]['likes'],
-                            style: TextStyle(color: Colors.black),
+                            style: TextStyle(
+                                color: Colors.black,
+                                fontSize: screenSize.width * 0.04,
+                                fontWeight: FontWeight.w600),
                           ),
+                          SizedBox(width: screenSize.width * 0.04),
                           IconButton(
                             icon: Icon(
                               Icons.comment,
@@ -138,9 +165,13 @@ datafeet(BuildContext context) {
                             ),
                             onPressed: () {},
                           ),
+                          SizedBox(width: screenSize.width * 0.01),
                           Text(
                             DataFeet.dataFeet[i]['likes'],
-                            style: TextStyle(color: Colors.black),
+                            style: TextStyle(
+                                color: Colors.black,
+                                fontSize: screenSize.width * 0.04,
+                                fontWeight: FontWeight.w600),
                           ),
                         ],
                       ),
@@ -148,7 +179,7 @@ datafeet(BuildContext context) {
                     Container(
                       child: IconButton(
                           icon: Icon(
-                            Icons.bookmark_border,
+                            i % 2 == 0 ? Icons.bookmark_border : Icons.bookmark,
                             color: Colors.black,
                           ),
                           onPressed: () {}),

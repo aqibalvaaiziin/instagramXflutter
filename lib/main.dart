@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:instagramxflutter/widgets/splash.dart';
 
 void main() {
+  
   runApp(MyApp());
 }
 
