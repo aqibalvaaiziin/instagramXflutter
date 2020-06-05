@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:instagramxflutter/helper/icon/icon_data.dart';
 
 imageProfile(BuildContext context) {
   var screenSize = MediaQuery.of(context).size;
@@ -99,6 +100,10 @@ descProfile(BuildContext context) {
 statsProfile(BuildContext context) {
   var screenSize = MediaQuery.of(context).size;
   return Container(
+    margin: EdgeInsets.only(
+      top: screenSize.height * 0.02,
+      bottom: screenSize.height * 0.02,
+    ),
     width: screenSize.width,
     child: Column(
       children: <Widget>[
@@ -248,6 +253,72 @@ messageButton(BuildContext context) {
           ),
         ),
       ),
+    ),
+  );
+}
+
+headerControl(BuildContext context) {
+  var screenSize = MediaQuery.of(context).size;
+  return Container(
+    margin: EdgeInsets.only(top: screenSize.height * 0.1),
+    child: Column(
+      children: <Widget>[
+        Container(
+          margin: EdgeInsets.only(
+            top: screenSize.height * 0.01,
+          ),
+          width: screenSize.width,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: <Widget>[
+              descProfile(context),
+              imageProfile(context),
+            ],
+          ),
+        ),
+        statsProfile(context),
+        Container(
+          width: screenSize.width,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              followButton(context),
+              SizedBox(width: screenSize.width * 0.04),
+              messageButton(context)
+            ],
+          ),
+        ),
+      ],
+    ),
+  );
+}
+
+dataTitle(BuildContext context, bool data) {
+  var screenSize = MediaQuery.of(context).size;
+  return Container(
+    child: Row(
+      children: <Widget>[
+        Container(
+          child: IconButton(
+            icon: CustomIcon.iconMore(
+                color: Colors.white, size: screenSize.width * 0.055),
+            onPressed: () {},
+          ),
+        ),
+        AnimatedOpacity(
+          opacity: data ? 1.0 : 0.0,
+          duration: Duration(milliseconds: 300),
+          child: Container(
+            child: Text(
+              data ? "Federica Sarawana" : "            ",
+              style: TextStyle(
+                fontSize: screenSize.width * 0.06,
+                fontWeight: FontWeight.w600,
+              ),
+            ),
+          ),
+        ),
+      ],
     ),
   );
 }
