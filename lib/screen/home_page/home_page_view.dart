@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:instagramxflutter/helper/data/dataJson.dart';
+import 'package:instagramxflutter/screen/detail_feet/detail_feet.dart';
 import 'package:instagramxflutter/screen/home_page/widgets/sotry.dart';
+import '../../widgets/route_animation.dart';
 import './home_page_view_model.dart';
 
 class HomePageView extends HomePageViewModel {
@@ -45,7 +47,27 @@ class HomePageView extends HomePageViewModel {
             ),
             SliverList(
               delegate: SliverChildListDelegate(DataFeet.dataFeet
-                  .map((item) => datafeet(context, item))
+                  .map(
+                    (item) => GestureDetector(
+                      onTap: () {
+                        Navigator.of(context).push(
+                          routeTo(
+                            DetailFeet(
+                              avatar: item['avatar'],
+                              name: item['name'],
+                              time: item['time'],
+                              comments: item['comment'],
+                              likes: item['likes'],
+                              image: item['image'],
+                              caption: item['caption'],
+                              view : item['view'],
+                            ),
+                          ),
+                        );
+                      },
+                      child: datafeet(context, item),
+                    ),
+                  )
                   .toList()),
             ),
           ],
