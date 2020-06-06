@@ -133,7 +133,12 @@ abstract class DetailFeetViewModel extends State<DetailFeet> {
                   Container(
                     child: Text(
                       "${data.caption}",
-                      style: TextStyle(fontSize: screenSize.width * 0.03),
+                      style: TextStyle(
+                        fontSize: screenSize.width * 0.032,
+                        letterSpacing: screenSize.width * 0.001,
+                        height: screenSize.width * 0.003,
+                      ),
+                      maxLines: 3,
                     ),
                   ),
                 ],

@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:instagramxflutter/helper/data/dataJson.dart';
+import 'package:instagramxflutter/screen/detail_feet/detail_feet.dart';
 import 'package:instagramxflutter/screen/profile_page/widgets/all_header_widgets.dart';
 import 'package:instagramxflutter/screen/profile_page/widgets/grid_data.dart';
+import 'package:instagramxflutter/widgets/route_animation.dart';
 import './profile_page_view_model.dart';
 
 class ProfilePageView extends ProfilePageViewModel {
@@ -35,10 +37,31 @@ class ProfilePageView extends ProfilePageViewModel {
                 ),
               ),
               SliverGrid.count(
+                crossAxisSpacing: 3,
                 mainAxisSpacing: 3,
                 crossAxisCount: 3,
-                children: DataStory.dataStory
-                    .map((item) => dataFeet(context, item))
+                children: DataFeet.dataFeet
+                    .map(
+                      (item) => GestureDetector(
+                        onTap: () {
+                          Navigator.of(context).push(
+                            routeTo(
+                              DetailFeet(
+                                avatar: item['avatar'],
+                                name: item['name'],
+                                time: item['time'],
+                                comments: item['comment'],
+                                likes: item['likes'],
+                                image: item['image'],
+                                caption: item['caption'],
+                                view: item['view'],
+                              ),
+                            ),
+                          );
+                        },
+                        child: dataFeet(context, item),
+                      ),
+                    )
                     .toList(),
               ),
             ],

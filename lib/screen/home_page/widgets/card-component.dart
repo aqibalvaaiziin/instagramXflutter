@@ -83,12 +83,15 @@ imageCard(BuildContext context, data) {
     ),
     width: screenSize.width,
     height: screenSize.height * 0.487,
-    decoration: BoxDecoration(
-        borderRadius:
-            BorderRadius.all(Radius.circular(screenSize.width * 0.02)),
-        image: DecorationImage(
-          image: AssetImage(data['image']),
+    child: ClipRRect(
+      borderRadius: BorderRadius.all(Radius.circular(screenSize.width * 0.02)),
+      child: Hero(
+        tag: data,
+        child: Image.asset(
+          data['image'],
           fit: BoxFit.cover,
-        )),
+        ),
+      ),
+    ),
   );
 }
