@@ -31,6 +31,8 @@ dependencies:
   flutter_icons: ^1.1.0
   device_preview: ^0.4.5
   flutter_staggered_grid_view: ^0.3.0
+  video_player: ^0.10.11+1
+  chewie: ^0.9.10
 
 dev_dependencies:
   flutter_test:
@@ -52,6 +54,7 @@ flutter:
     - assets/images/
     - assets/images/avatar/
     - assets/images/feet/
+    - assets/videos/
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

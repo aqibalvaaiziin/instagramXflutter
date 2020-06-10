@@ -57,7 +57,6 @@ abstract class HomePageViewModel extends State<HomePage> {
                             });
                           },
                         ),
-                        SizedBox(width: screenSize.width * 0.003),
                         Text(
                           data['likes'].toString(),
                           style: TextStyle(

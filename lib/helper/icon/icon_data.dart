@@ -18,6 +18,7 @@ class CustomIcon {
     );
   }
 
+
   static Widget bookmark({size, color, bool status}) {
     return Icon(
       status ? FontAwesome.bookmark : FontAwesome.bookmark_o,

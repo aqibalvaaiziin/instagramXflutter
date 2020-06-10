@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:instagramxflutter/helper/data/dataJson.dart';
 import 'package:instagramxflutter/screen/detail_feet/detail_feet.dart';
 import 'package:instagramxflutter/screen/home_page/widgets/sotry.dart';
@@ -10,14 +9,6 @@ class HomePageView extends HomePageViewModel {
   @override
   Widget build(BuildContext context) {
     var screenSize = MediaQuery.of(context).size;
-    SystemChrome.setSystemUIOverlayStyle(
-      SystemUiOverlayStyle(
-        statusBarColor: Color(0xff3d3d3d),
-        statusBarIconBrightness: Brightness.light,
-        systemNavigationBarColor: Color(0xff3d3d3d),
-        systemNavigationBarIconBrightness: Brightness.light,
-      ),
-    );
     return Scaffold(
       body: SafeArea(
         bottom: false,
@@ -60,7 +51,7 @@ class HomePageView extends HomePageViewModel {
                               likes: item['likes'],
                               image: item['image'],
                               caption: item['caption'],
-                              view : item['view'],
+                              view: item['view'],
                             ),
                           ),
                         );

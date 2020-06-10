@@ -29,11 +29,9 @@ cardHeader(BuildContext context, data) {
               ),
               SizedBox(width: screenSize.width * 0.02),
               Container(
-                padding: EdgeInsets.only(
-                  top: screenSize.height * 0.01,
-                ),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
                     Text(
                       data['name'],

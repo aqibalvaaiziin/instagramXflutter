@@ -296,6 +296,9 @@ headerControl(BuildContext context) {
 dataTitle(BuildContext context, bool data) {
   var screenSize = MediaQuery.of(context).size;
   return Container(
+    width: screenSize.width,
+    padding: EdgeInsets.zero,
+    margin: EdgeInsets.zero,
     child: Row(
       children: <Widget>[
         Container(

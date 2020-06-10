@@ -3,9 +3,11 @@ import 'package:flutter/material.dart';
 headerBar(BuildContext context) {
   var screenSize = MediaQuery.of(context).size;
   return Container(
+    width: screenSize.width,
+    height: screenSize.height * 0.08,
     padding: EdgeInsets.fromLTRB(
       screenSize.width * 0.01,
-      screenSize.width * 0.021,
+      screenSize.width * 0.019,
       screenSize.width * 0.01,
       screenSize.width * 0.01,
     ),
@@ -16,7 +18,7 @@ headerBar(BuildContext context) {
           child: Text(
             "Instagram",
             style: TextStyle(
-              fontSize: screenSize.width * 0.05,
+              fontSize: screenSize.width * 0.055,
               fontFamily: "vegan",
             ),
           ),
@@ -26,18 +28,8 @@ headerBar(BuildContext context) {
             children: <Widget>[
               IconButton(
                 icon: Icon(
-                  Icons.live_tv,
-                  size: screenSize.width * 0.05,
-                ),
-                onPressed: () {},
-              ),
-              SizedBox(
-                width: screenSize.width * 0.02,
-              ),
-              IconButton(
-                icon: Icon(
                   Icons.send,
-                  size: screenSize.width * 0.05,
+                  size: screenSize.width * 0.055,
                 ),
                 onPressed: () {},
               ),

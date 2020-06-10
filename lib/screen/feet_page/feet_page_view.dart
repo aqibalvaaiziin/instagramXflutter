@@ -69,11 +69,9 @@ class FeetPageView extends FeetPageViewModel {
                   cross = 1;
                   main = 1;
                 }
-
                 return StaggeredTile.count(cross, main);
               },
               itemBuilder: (context, i) {
-                print("$i ${DataFeet.dataFeet[i]['image']}");
                 return GestureDetector(
                   onTap: () {
                     Navigator.of(context).push(
