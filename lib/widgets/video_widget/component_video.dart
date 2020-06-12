@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
+import 'package:instagramxflutter/screen/video_comment_page/video_comment_page.dart';
+import 'package:instagramxflutter/widgets/route_animation.dart';
 
 buttonControl(BuildContext context, String avatar, int likes, int comment) {
   var screenSize = MediaQuery.of(context).size;
@@ -67,7 +69,7 @@ buttonControl(BuildContext context, String avatar, int likes, int comment) {
                       size: screenSize.width * 0.08,
                     ),
                     onPressed: () {
-                      print("object");
+                      Navigator.of(context).push(routeToV(VideoCommentPage()));
                     }),
                 Text(
                   comment.toString(),

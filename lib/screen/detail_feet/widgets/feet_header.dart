@@ -17,8 +17,8 @@ cardHeader(BuildContext context, data) {
           child: Row(
             children: <Widget>[
               Container(
-                width: screenSize.width * 0.12,
-                height: screenSize.width * 0.12,
+                width: screenSize.width * 0.1,
+                height: screenSize.width * 0.1,
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
                   image: DecorationImage(
@@ -30,11 +30,9 @@ cardHeader(BuildContext context, data) {
               ),
               SizedBox(width: screenSize.width * 0.02),
               Container(
-                padding: EdgeInsets.only(
-                  top: screenSize.height * 0.01,
-                ),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
                     Text(
                       data.name,
@@ -133,14 +131,14 @@ Widget listComments(BuildContext context, data) {
               TextSpan(
                 text: "${data['name']} ",
                 style: TextStyle(
-                  fontSize: screenSize.width * 0.03,
-                  fontWeight: FontWeight.bold,
+                  fontSize: screenSize.width * 0.035,
+                  fontWeight: FontWeight.w600,
                 ),
               ),
               TextSpan(
                 text: "${data['comment']} ",
                 style: TextStyle(
-                  fontSize: screenSize.width * 0.028,
+                  fontSize: screenSize.width * 0.03,
                 ),
               ),
             ],
@@ -154,7 +152,7 @@ Widget listComments(BuildContext context, data) {
             Text(
               "${data['time'].toString()} min",
               style: TextStyle(
-                fontSize: screenSize.width * 0.02,
+                fontSize: screenSize.width * 0.03,
               ),
             ),
             SizedBox(
@@ -163,7 +161,7 @@ Widget listComments(BuildContext context, data) {
             Text(
               "${data['likes'].toString()} likes",
               style: TextStyle(
-                fontSize: screenSize.width * 0.02,
+                fontSize: screenSize.width * 0.03,
               ),
             ),
           ],

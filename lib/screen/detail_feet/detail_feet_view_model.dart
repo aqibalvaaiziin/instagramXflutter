@@ -4,6 +4,7 @@ import '../../helper/icon/icon_data.dart';
 import './detail_feet.dart';
 
 abstract class DetailFeetViewModel extends State<DetailFeet> {
+  TextEditingController controller = TextEditingController();
   bool isfav = false;
   bool isbooked = false;
 
@@ -19,8 +20,8 @@ abstract class DetailFeetViewModel extends State<DetailFeet> {
               margin: EdgeInsets.only(
                 top: screenSize.height * 0.12,
                 bottom: screenSize.height * 0.015,
-                left: screenSize.width * 0.03,
-                right: screenSize.width * 0.03,
+                left: screenSize.width * 0.06,
+                right: screenSize.width * 0.06,
               ),
               decoration: BoxDecoration(
                 color: Colors.white,
@@ -114,31 +115,21 @@ abstract class DetailFeetViewModel extends State<DetailFeet> {
             flex: 1,
             child: Container(
               margin: EdgeInsets.only(
-                right: screenSize.width * 0.03,
-                left: screenSize.width * 0.04,
+                right: screenSize.width * 0.05,
+                left: screenSize.width * 0.05,
               ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
                   Container(
-                    child: Text(
-                      "${data.view.toString()} Views",
-                      style: TextStyle(
-                        fontSize: screenSize.width * 0.035,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ),
-                  SizedBox(height: screenSize.height * 0.01),
-                  Container(
+                    margin: EdgeInsets.only(top: screenSize.height * 0.01),
                     child: Text(
                       "${data.caption}",
                       style: TextStyle(
-                        fontSize: screenSize.width * 0.032,
+                        fontSize: screenSize.width * 0.034,
                         letterSpacing: screenSize.width * 0.001,
-                        height: screenSize.width * 0.003,
                       ),
-                      maxLines: 3,
+                      maxLines: 4,
                     ),
                   ),
                 ],

@@ -11,13 +11,13 @@ abstract class HomePageViewModel extends State<HomePage> {
     var screenSize = MediaQuery.of(context).size;
     return Container(
       margin: EdgeInsets.only(
-        left: screenSize.width * 0.03,
-        right: screenSize.width * 0.03,
+        left: screenSize.width * 0.06,
+        right: screenSize.width * 0.06,
         top: screenSize.width * 0.02,
         bottom: screenSize.width * 0.03,
       ),
       width: screenSize.width,
-      height: screenSize.height * 0.67,
+      height: screenSize.height * 0.63,
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.all(

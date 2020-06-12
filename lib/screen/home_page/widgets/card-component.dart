@@ -24,7 +24,7 @@ cardHeader(BuildContext context, data) {
                       image: AssetImage(
                         data['avatar'],
                       ),
-                      fit: BoxFit.fill),
+                      fit: BoxFit.cover),
                 ),
               ),
               SizedBox(width: screenSize.width * 0.02),
@@ -38,7 +38,7 @@ cardHeader(BuildContext context, data) {
                       style: TextStyle(
                         fontSize: screenSize.width * 0.04,
                         color: Colors.black,
-                        fontWeight: FontWeight.w600,
+                        fontWeight: FontWeight.w700,
                       ),
                     ),
                     Text(

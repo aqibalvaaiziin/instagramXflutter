@@ -14,7 +14,7 @@ class TvPageView extends TvPageViewModel {
         itemCount: DataVideo.dataVideo.length,
         itemBuilder: (context, i) {
           return ChewieItem(
-            videoPlayerController: VideoPlayerController.asset(
+            videoPlayerController: VideoPlayerController.network(
               DataVideo.dataVideo[i]['video'],
             ),
             avatar: DataVideo.dataVideo[i]['avatar'],

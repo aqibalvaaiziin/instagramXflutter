@@ -53,7 +53,7 @@ dataStory(BuildContext context, data) {
       shape: BoxShape.circle,
       image: DecorationImage(
         image: AssetImage(data),
-        fit: BoxFit.fill,
+        fit: BoxFit.cover,
       ),
     ),
   );
