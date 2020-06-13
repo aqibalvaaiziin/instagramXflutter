@@ -36,13 +36,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.1.3"
-  chewie:
-    dependency: "direct main"
-    description:
-      name: chewie
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "0.9.10"
   collection:
     dependency: transitive
     description:
@@ -64,6 +57,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.1.4"
+  csslib:
+    dependency: transitive
+    description:
+      name: csslib
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.16.1"
   cupertino_icons:
     dependency: "direct main"
     description:
@@ -78,13 +78,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.4.5"
-  emoji_picker:
+  flick_video_player:
     dependency: "direct main"
     description:
-      name: emoji_picker
+      name: flick_video_player
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.1.0"
+    version: "0.1.1"
   flutter:
     dependency: "direct main"
     description: flutter
@@ -114,6 +114,13 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
+  flutter_widgets:
+    dependency: "direct main"
+    description:
+      name: flutter_widgets
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.1.12"
   font_awesome_flutter:
     dependency: transitive
     description:
@@ -128,6 +135,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.7.1"
+  html:
+    dependency: transitive
+    description:
+      name: html
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.14.0+3"
   http:
     dependency: transitive
     description:
@@ -170,13 +184,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.1.8"
-  open_iconic_flutter:
+  nested:
     dependency: transitive
     description:
-      name: open_iconic_flutter
+      name: nested
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.3.0"
+    version: "0.0.4"
   path:
     dependency: transitive
     description:
@@ -198,6 +212,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.4.0"
+  provider:
+    dependency: transitive
+    description:
+      name: provider
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "4.1.3"
   quiver:
     dependency: transitive
     description:
@@ -266,6 +287,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.0.5"
+  swipedetector:
+    dependency: "direct main"
+    description:
+      name: swipedetector
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.2.0"
   term_glyph:
     dependency: transitive
     description:
@@ -331,4 +359,4 @@ packages:
     version: "3.6.1"
 sdks:
   dart: ">=2.7.0 <3.0.0"
-  flutter: ">=1.12.13+hotfix.5 <2.0.0"
+  flutter: ">=1.16.0 <2.0.0"

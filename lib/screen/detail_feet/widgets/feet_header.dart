@@ -126,6 +126,7 @@ Widget listComments(BuildContext context, data) {
       ),
       title: Container(
         child: RichText(
+          maxLines: 3,
           text: TextSpan(
             children: <TextSpan>[
               TextSpan(

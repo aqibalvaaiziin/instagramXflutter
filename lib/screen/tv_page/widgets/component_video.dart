@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
-import 'package:instagramxflutter/screen/video_comment_page/video_comment_page.dart';
-import 'package:instagramxflutter/widgets/route_animation.dart';
+import 'package:instagramxflutter/screen/tv_page/widgets/modal_comment.dart';
 
 buttonControl(BuildContext context, String avatar, int likes, int comment) {
   var screenSize = MediaQuery.of(context).size;
@@ -50,7 +49,7 @@ buttonControl(BuildContext context, String avatar, int likes, int comment) {
                 Text(
                   likes.toString(),
                   style: TextStyle(
-                    fontSize: screenSize.width * 0.04,
+                    fontSize: screenSize.width * 0.037,
                     fontWeight: FontWeight.w600,
                   ),
                 ),
@@ -69,12 +68,12 @@ buttonControl(BuildContext context, String avatar, int likes, int comment) {
                       size: screenSize.width * 0.08,
                     ),
                     onPressed: () {
-                      Navigator.of(context).push(routeToV(VideoCommentPage()));
+                      modalPage(context, comment);
                     }),
                 Text(
                   comment.toString(),
                   style: TextStyle(
-                    fontSize: screenSize.width * 0.04,
+                    fontSize: screenSize.width * 0.037,
                     fontWeight: FontWeight.w600,
                   ),
                 ),
@@ -83,6 +82,27 @@ buttonControl(BuildContext context, String avatar, int likes, int comment) {
           ),
         ),
       ],
+    ),
+  );
+}
+
+pauseButton(BuildContext context) {
+  var screenSize = MediaQuery.of(context).size;
+  return Container(
+    width: screenSize.width * 0.15,
+    height: screenSize.width * 0.15,
+    decoration: BoxDecoration(
+      color: Colors.grey.withOpacity(0.5),
+      borderRadius: BorderRadius.all(
+        Radius.circular(screenSize.width * 0.02),
+      ),
+    ),
+    child: Center(
+      child: Icon(
+        Icons.play_arrow,
+        size: screenSize.width * 0.15,
+        color: Colors.white.withOpacity(0.8),
+      ),
     ),
   );
 }
