@@ -4,13 +4,7 @@ headerBar(BuildContext context) {
   var screenSize = MediaQuery.of(context).size;
   return Container(
     width: screenSize.width,
-    height: screenSize.height * 0.08,
-    padding: EdgeInsets.fromLTRB(
-      screenSize.width * 0.01,
-      screenSize.width * 0.019,
-      screenSize.width * 0.01,
-      screenSize.width * 0.01,
-    ),
+    height: screenSize.height * 0.1,
     child: Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: <Widget>[
@@ -41,20 +35,71 @@ headerBar(BuildContext context) {
   );
 }
 
-dataStory(BuildContext context, data) {
+dataStory(
+  BuildContext context,
+  String image,
+  String name,
+  bool isClicked,
+  String id,
+) {
   var screenSize = MediaQuery.of(context).size;
   return Container(
-    width: screenSize.width * 0.17,
-    height: screenSize.width * 0.17,
-    margin: EdgeInsets.symmetric(
-        horizontal: screenSize.width * 0.02,
-        vertical: screenSize.height * 0.014),
-    decoration: BoxDecoration(
-      shape: BoxShape.circle,
-      image: DecorationImage(
-        image: AssetImage(data),
-        fit: BoxFit.cover,
-      ),
+    margin: EdgeInsets.symmetric(horizontal: screenSize.width * 0.01),
+    child: Column(
+      children: <Widget>[
+        Container(
+          width: screenSize.width * 0.18,
+          height: screenSize.width * 0.18,
+          child: Stack(
+            alignment: Alignment(0, 0),
+            children: <Widget>[
+              Container(
+                width: screenSize.width * 0.172,
+                height: screenSize.width * 0.172,
+                child: CircleAvatar(
+                  backgroundColor: isClicked ? Colors.grey : Colors.redAccent,
+                ),
+              ),
+              Container(
+                width: screenSize.width * 0.16,
+                height: screenSize.width * 0.16,
+                child: CircleAvatar(
+                  backgroundColor: Color(0xff1c1c1c),
+                ),
+              ),
+              Container(
+                width: screenSize.width * 0.14,
+                height: screenSize.width * 0.14,
+                child: CircleAvatar(
+                  backgroundImage: AssetImage(image),
+                ),
+              ),
+              Container(
+                width: screenSize.width * 0.17,
+                height: screenSize.width * 0.17,
+                child: FloatingActionButton(
+                  heroTag: "btn $id",
+                  onPressed: () {},
+                  elevation: 0,
+                  backgroundColor: Colors.transparent,
+                ),
+              )
+            ],
+          ),
+        ),
+        SizedBox(height: screenSize.height * 0.004),
+        Container(
+          width: screenSize.width * 0.19,
+          child: Center(
+            child: Text(
+              name,
+              overflow: TextOverflow.ellipsis,
+              style: TextStyle(fontSize: screenSize.width * 0.03),
+              maxLines: 1,
+            ),
+          ),
+        )
+      ],
     ),
   );
 }

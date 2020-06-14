@@ -19,18 +19,21 @@ class HomePageView extends HomePageViewModel {
             SliverAppBar(
               title: headerBar(context),
               pinned: true,
-              expandedHeight: screenSize.height * 0.185,
+              expandedHeight: screenSize.height * 0.213,
               flexibleSpace: FlexibleSpaceBar(
-                titlePadding: EdgeInsets.only(bottom: screenSize.height * 0.01),
                 background: Container(
                   margin: EdgeInsets.only(top: screenSize.height * 0.08),
-                  width: screenSize.width,
                   child: ListView.builder(
                     scrollDirection: Axis.horizontal,
                     itemCount: DataStory.dataStory.length,
                     itemBuilder: (context, i) {
                       return dataStory(
-                          context, DataStory.dataStory[i]['image']);
+                        context,
+                        DataStory.dataStory[i]['image'],
+                        DataStory.dataStory[i]['name'],
+                        true,
+                        DataStory.dataStory[i]['id'],
+                      );
                     },
                   ),
                 ),

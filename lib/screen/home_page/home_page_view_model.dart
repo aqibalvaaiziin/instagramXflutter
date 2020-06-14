@@ -2,10 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:instagramxflutter/helper/icon/icon_data.dart';
 import 'package:instagramxflutter/screen/home_page/widgets/card-component.dart';
 import './home_page.dart';
+import 'package:collection/collection.dart';
 
 abstract class HomePageViewModel extends State<HomePage> {
   bool isfav = false;
   bool isbooked = false;
+  List isLookedStory = ["1", "3", "5", "7"];
+  Function equals = const ListEquality().equals;
+  bool contains = false;
+
 
   Widget datafeet(BuildContext context, data) {
     var screenSize = MediaQuery.of(context).size;
@@ -104,5 +109,10 @@ abstract class HomePageViewModel extends State<HomePage> {
         ],
       ),
     );
+  }
+
+  @override
+  void initState() {
+    super.initState();
   }
 }

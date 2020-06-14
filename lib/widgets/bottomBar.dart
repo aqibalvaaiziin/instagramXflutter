@@ -17,7 +17,7 @@ bottomBar(BuildContext context) {
         )),
         Tab(
             icon: Icon(
-          FontAwesome.search,
+          FontAwesome.image,
           size: screenSize.width * 0.06,
         )),
         Tab(

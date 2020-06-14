@@ -83,12 +83,9 @@ imageCard(BuildContext context, data) {
     height: screenSize.height * 0.487,
     child: ClipRRect(
       borderRadius: BorderRadius.all(Radius.circular(screenSize.width * 0.02)),
-      child: Hero(
-        tag: data,
-        child: Image.asset(
-          data['image'],
-          fit: BoxFit.cover,
-        ),
+      child: Image.asset(
+        data['image'],
+        fit: BoxFit.cover,
       ),
     ),
   );

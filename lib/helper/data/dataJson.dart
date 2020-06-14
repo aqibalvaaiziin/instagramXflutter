@@ -1,65 +1,55 @@
 class DataStory {
   static var dataStory = [
-    {"image": "assets/images/avatar/woman5.jpg"},
-    {"image": "assets/images/avatar/woman4.jpg"},
-    {"image": "assets/images/avatar/woman3.jpg"},
-    {"image": "assets/images/avatar/woman2.jpg"},
-    {"image": "assets/images/avatar/woman1.jpg"},
-    {"image": "assets/images/feet/feet3.jpg"},
-    {"image": "assets/images/feet/feet2.jpg"},
-    {"image": "assets/images/feet/feet1.jpg"},
-    {"image": "assets/images/feet/feet4.jpg"},
-    {"image": "assets/images/feet/feet5.jpg"},
-    {"image": "assets/images/avatar/woman5.jpg"},
-    {"image": "assets/images/avatar/woman4.jpg"},
-    {"image": "assets/images/avatar/woman3.jpg"},
-    {"image": "assets/images/avatar/woman2.jpg"},
-    {"image": "assets/images/avatar/woman1.jpg"},
-    {"image": "assets/images/avatar/woman5.jpg"},
-    {"image": "assets/images/avatar/woman4.jpg"},
-    {"image": "assets/images/avatar/woman3.jpg"},
-    {"image": "assets/images/avatar/woman2.jpg"},
-    {"image": "assets/images/avatar/woman1.jpg"},
-    {"image": "assets/images/feet/feet3.jpg"},
-    {"image": "assets/images/feet/feet2.jpg"},
-    {"image": "assets/images/feet/feet1.jpg"},
-    {"image": "assets/images/feet/feet4.jpg"},
-    {"image": "assets/images/feet/feet5.jpg"},
-    {"image": "assets/images/avatar/woman5.jpg"},
-    {"image": "assets/images/avatar/woman4.jpg"},
-    {"image": "assets/images/avatar/woman3.jpg"},
-    {"image": "assets/images/avatar/woman2.jpg"},
-    {"image": "assets/images/avatar/woman1.jpg"},
-    {"image": "assets/images/avatar/woman5.jpg"},
-    {"image": "assets/images/avatar/woman4.jpg"},
-    {"image": "assets/images/avatar/woman3.jpg"},
-    {"image": "assets/images/avatar/woman2.jpg"},
-    {"image": "assets/images/avatar/woman1.jpg"},
-    {"image": "assets/images/feet/feet3.jpg"},
-    {"image": "assets/images/feet/feet2.jpg"},
-    {"image": "assets/images/feet/feet1.jpg"},
-    {"image": "assets/images/feet/feet4.jpg"},
-    {"image": "assets/images/feet/feet5.jpg"},
-    {"image": "assets/images/avatar/woman5.jpg"},
-    {"image": "assets/images/avatar/woman4.jpg"},
-    {"image": "assets/images/avatar/woman3.jpg"},
-    {"image": "assets/images/avatar/woman2.jpg"},
-    {"image": "assets/images/avatar/woman1.jpg"},
-    {"image": "assets/images/avatar/woman5.jpg"},
-    {"image": "assets/images/avatar/woman4.jpg"},
-    {"image": "assets/images/avatar/woman3.jpg"},
-    {"image": "assets/images/avatar/woman2.jpg"},
-    {"image": "assets/images/avatar/woman1.jpg"},
-    {"image": "assets/images/feet/feet3.jpg"},
-    {"image": "assets/images/feet/feet2.jpg"},
-    {"image": "assets/images/feet/feet1.jpg"},
-    {"image": "assets/images/feet/feet4.jpg"},
-    {"image": "assets/images/feet/feet5.jpg"},
-    {"image": "assets/images/avatar/woman5.jpg"},
-    {"image": "assets/images/avatar/woman4.jpg"},
-    {"image": "assets/images/avatar/woman3.jpg"},
-    {"image": "assets/images/avatar/woman2.jpg"},
-    {"image": "assets/images/avatar/woman1.jpg"},
+    {
+      "image": "assets/images/avatar/woman5.jpg",
+      "id": "1",
+      "name": "Bella Resden"
+    },
+    {
+      "image": "assets/images/avatar/woman4.jpg",
+      "id": "2",
+      "name": "Natasya Polind"
+    },
+    {
+      "image": "assets/images/avatar/woman3.jpg",
+      "id": "3",
+      "name": "Roy Ricardo"
+    },
+    {
+      "image": "assets/images/avatar/woman2.jpg",
+      "id": "4",
+      "name": "Randy Roaught"
+    },
+    {
+      "image": "assets/images/avatar/woman1.jpg",
+      "id": "5",
+      "name": "Nicolas Pereira"
+    },
+    {
+      "image": "assets/images/avatar/woman5.jpg",
+      "id": "6",
+      "name": "Bella Resden"
+    },
+    {
+      "image": "assets/images/avatar/woman4.jpg",
+      "id": "7",
+      "name": "Natasya Polind"
+    },
+    {
+      "image": "assets/images/avatar/woman3.jpg",
+      "id": "8",
+      "name": "Roy Ricardo"
+    },
+    {
+      "image": "assets/images/avatar/woman2.jpg",
+      "id": "9",
+      "name": "Randy Roaught"
+    },
+    {
+      "image": "assets/images/avatar/woman1.jpg",
+      "id": "10",
+      "name": "Nicolas Pereira"
+    },
   ];
 }
 

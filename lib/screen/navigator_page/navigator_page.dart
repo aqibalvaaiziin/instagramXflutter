@@ -4,6 +4,7 @@ import 'package:instagramxflutter/screen/home_page/home_page.dart';
 import 'package:instagramxflutter/screen/profile_page/profile_page.dart';
 import 'package:instagramxflutter/screen/tv_page/tv_page.dart';
 import 'package:instagramxflutter/widgets/bottomBar.dart';
+import 'package:instagramxflutter/widgets/post_page.dart';
 
 class NavigatorPage extends StatelessWidget {
   @override
@@ -15,7 +16,7 @@ class NavigatorPage extends StatelessWidget {
           children: <Widget>[
             HomePage(),
             FeetPage(),
-            HomePage(),
+            PostPage(),
             TvPage(),
             ProfilePage(),
           ],
