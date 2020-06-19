@@ -7,7 +7,7 @@ class PostVideoPageView extends PostVideoPageViewModel {
     return Scaffold(
       body: Center(
         child: Text(
-          "Image Post Page",
+          "Video Post Page",
           style: TextStyle(fontSize: 50),
         ),
       ),

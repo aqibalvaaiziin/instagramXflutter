@@ -11,7 +11,6 @@ abstract class HomePageViewModel extends State<HomePage> {
   Function equals = const ListEquality().equals;
   bool contains = false;
 
-
   Widget datafeet(BuildContext context, data) {
     var screenSize = MediaQuery.of(context).size;
     return Container(
@@ -110,6 +109,8 @@ abstract class HomePageViewModel extends State<HomePage> {
       ),
     );
   }
+
+  
 
   @override
   void initState() {

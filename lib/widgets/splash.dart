@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:instagramxflutter/screen/navigator_page/navigator_page.dart';
+import 'package:instagramxflutter/screen/login_page/login_page.dart';
 import 'package:instagramxflutter/widgets/route_animation.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -13,7 +13,7 @@ class _SplashScreenState extends State<SplashScreen> {
     super.initState();
     new Future.delayed(
       const Duration(seconds: 3),
-      () => Navigator.of(context).pushReplacement(routeTo(NavigatorPage())),
+      () => Navigator.of(context).pushReplacement(routeTo(LoginPage())),
     );
   }
 
