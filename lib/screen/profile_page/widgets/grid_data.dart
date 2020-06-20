@@ -5,7 +5,7 @@ Widget dataFeet(BuildContext context, data) {
   return Container(
     width: screenSize.width * 0.1,
     height: screenSize.width * 0.1,
-    child: Image.asset(
+    child: Image.network(
       data['image'],
       fit: BoxFit.cover,
     ),

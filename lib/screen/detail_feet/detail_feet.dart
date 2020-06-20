@@ -2,9 +2,10 @@ import 'package:flutter/material.dart';
 import './detail_feet_view.dart';
 
 class DetailFeet extends StatefulWidget {
+  final String id;
   final String avatar;
   final String name;
-  final int time;
+  final String time;
   final String image;
   final int likes;
   final int comments;
@@ -13,6 +14,7 @@ class DetailFeet extends StatefulWidget {
 
   const DetailFeet({
     Key key,
+    this.id,
     this.avatar,
     this.name,
     this.time,

@@ -1,17 +1,44 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:instagramxflutter/providers/provider_image_comment.dart';
 import 'package:instagramxflutter/screen/detail_feet/widgets/feet_header.dart';
 import '../../helper/icon/icon_data.dart';
 import './detail_feet.dart';
 
 abstract class DetailFeetViewModel extends State<DetailFeet> {
-  TextEditingController controller = TextEditingController();
+  TextEditingController inputComment = TextEditingController();
+  final GlobalKey<AnimatedListState> listKey = GlobalKey();
   bool isfav = false;
   bool isbooked = false;
+  List dataComment = [];
 
-  feetHeader(BuildContext context, data) {
+  getAllComments() {
+    ProviderImageComment.getAllComment(widget.id).then((value) {
+      dataComment.clear();
+      var jsonObject = jsonDecode(jsonEncode(value.data));
+      for (var i = 0; i < jsonObject.length; i++) {
+        setState(() {
+          dataComment.add(jsonObject[i]);
+        });
+      }
+    });
+  }
+
+  feetHeader(
+    BuildContext context,
+    avatar,
+    name,
+    createdAt,
+    imageContent,
+    likes,
+    comment,
+    caption,
+  ) {
     var screenSize = MediaQuery.of(context).size;
     return Container(
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           Expanded(
             flex: 6,
@@ -31,11 +58,13 @@ abstract class DetailFeetViewModel extends State<DetailFeet> {
               ),
               child: Column(
                 children: <Widget>[
-                  Expanded(flex: 1, child: cardHeader(context, data)),
+                  Expanded(
+                      flex: 1,
+                      child: cardHeader(context, avatar, name, createdAt)),
                   Expanded(
                       flex: 5,
                       child: Container(
-                        child: imageCard(context, data),
+                        child: imageCard(context, imageContent),
                       )),
                   Expanded(
                     flex: 1,
@@ -63,7 +92,7 @@ abstract class DetailFeetViewModel extends State<DetailFeet> {
                                 ),
                                 SizedBox(width: screenSize.width * 0.003),
                                 Text(
-                                  data.likes.toString(),
+                                  likes.toString(),
                                   style: TextStyle(
                                     color: Colors.black,
                                     fontSize: screenSize.width * 0.04,
@@ -71,19 +100,19 @@ abstract class DetailFeetViewModel extends State<DetailFeet> {
                                   ),
                                 ),
                                 SizedBox(width: screenSize.width * 0.03),
-                                CustomIcon.comment(
-                                  size: screenSize.width * 0.055,
-                                  color: Colors.black,
-                                ),
-                                SizedBox(width: screenSize.width * 0.02),
-                                Text(
-                                  data.comments.toString(),
-                                  style: TextStyle(
-                                    color: Colors.black,
-                                    fontSize: screenSize.width * 0.04,
-                                    fontWeight: FontWeight.w500,
-                                  ),
-                                ),
+                                // CustomIcon.comment(
+                                //   size: screenSize.width * 0.055,
+                                //   color: Colors.black,
+                                // ),
+                                // SizedBox(width: screenSize.width * 0.02),
+                                // Text(
+                                //   comment.toString(),
+                                //   style: TextStyle(
+                                //     color: Colors.black,
+                                //     fontSize: screenSize.width * 0.04,
+                                //     fontWeight: FontWeight.w500,
+                                //   ),
+                                // ),
                               ],
                             ),
                           ),
@@ -122,9 +151,14 @@ abstract class DetailFeetViewModel extends State<DetailFeet> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
                   Container(
-                    margin: EdgeInsets.only(top: screenSize.height * 0.01),
+                    margin: EdgeInsets.only(
+                      top: screenSize.height * 0.01,
+                      left: screenSize.height * 0.01,
+                      right: screenSize.height * 0.01,
+                    ),
                     child: Text(
-                      "${data.caption}",
+                      "$caption",
+                      textAlign: TextAlign.left,
                       style: TextStyle(
                         fontSize: screenSize.width * 0.034,
                         letterSpacing: screenSize.width * 0.001,
@@ -139,5 +173,22 @@ abstract class DetailFeetViewModel extends State<DetailFeet> {
         ],
       ),
     );
+  }
+
+  void addComment() {
+    int index = dataComment.length;
+    ProviderImageComment.addComment(widget.id, inputComment.text).then((_) {
+      listKey.currentState.insertItem(index, duration: Duration(seconds: 1));
+      getAllComments();
+    });
+    setState(() {
+      inputComment.clear();
+    });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    getAllComments();
   }
 }

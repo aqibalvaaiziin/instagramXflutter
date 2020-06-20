@@ -47,18 +47,19 @@ abstract class LoginPageViewModel extends State<LoginPage> {
         onPressed: () {
           if (username.text.isNotEmpty && password.text.isNotEmpty) {
             loginBtnClicked();
-            ProviderUser.login(username.text, password.text)
-                .then((value) async {
+            ProviderUser.login(username.text, password.text).then((value) {
+              print(value.statusCode);
               var jsonObject = jsonDecode(jsonEncode(value.data));
-              if (jsonObject['isSuccess'] == false) {
-                message("Input doesn't match.", Colors.red[600]);
-              } else {
+              if (value.statusCode == 200) {
                 preferencesData.setToken(jsonObject['token']);
-                Navigator.of(context).pushReplacement(routeToV(NavigatorPage()));
+                Navigator.of(context)
+                    .pushReplacement(routeToV(NavigatorPage()));
+              } else {
+                toastMessage("Input doesn't match", Colors.red[600]);
               }
             });
           } else {
-            message("Enter the form first", Colors.red[600]);
+            toastMessage("Enter the form first", Colors.red[600]);
           }
         },
         child: Center(

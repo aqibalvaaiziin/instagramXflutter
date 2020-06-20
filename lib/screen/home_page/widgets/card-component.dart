@@ -21,8 +21,8 @@ cardHeader(BuildContext context, data) {
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
                   image: DecorationImage(
-                      image: AssetImage(
-                        data['avatar'],
+                      image: NetworkImage(
+                        data['user']['image'],
                       ),
                       fit: BoxFit.cover),
                 ),
@@ -34,7 +34,7 @@ cardHeader(BuildContext context, data) {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
                     Text(
-                      data['name'],
+                      data['user']['name'],
                       style: TextStyle(
                         fontSize: screenSize.width * 0.04,
                         color: Colors.black,
@@ -42,7 +42,7 @@ cardHeader(BuildContext context, data) {
                       ),
                     ),
                     Text(
-                      "${data['time'].toString()} min",
+                      "${data['createdAt'].toString()} min",
                       style: TextStyle(
                         fontSize: screenSize.width * 0.03,
                         color: Colors.grey[600],
@@ -83,8 +83,8 @@ imageCard(BuildContext context, data) {
     height: screenSize.height * 0.487,
     child: ClipRRect(
       borderRadius: BorderRadius.all(Radius.circular(screenSize.width * 0.02)),
-      child: Image.asset(
-        data['image'],
+      child: Image.network(
+        data['imageLink'],
         fit: BoxFit.cover,
       ),
     ),

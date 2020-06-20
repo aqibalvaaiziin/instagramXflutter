@@ -7,10 +7,21 @@ class ProviderUser {
     receiveTimeout: 3000,
   );
   static Dio dio = Dio(options);
+  static Response response;
   static Future login(String username, String password) async {
-    return dio.post("/user/login", data: {
-      "username": username,
-      "password": password,
-    });
+    try {
+      response = await dio.post("/user/login", data: {
+        "username": username,
+        "password": password,
+      });
+      return response;
+    } on DioError catch (e) {
+      if (e.response.statusCode != 200) {
+        print(e.toString());
+      } else {
+        print(e.request);
+        print(e.message);
+      }
+    }
   }
 }
