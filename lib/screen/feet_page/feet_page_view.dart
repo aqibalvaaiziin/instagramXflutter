@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
-import 'package:instagramxflutter/helper/data/dataJson.dart';
-import 'package:instagramxflutter/screen/detail_feet/detail_feet.dart';
 import 'package:instagramxflutter/screen/feet_page/widgets/item_category.dart';
+import 'package:instagramxflutter/screen/scroll_feet_page/scroll_feet_page.dart';
 import 'package:instagramxflutter/widgets/route_animation.dart';
 import './feet_page_view_model.dart';
 
@@ -55,7 +54,7 @@ class FeetPageView extends FeetPageViewModel {
               crossAxisSpacing: 3,
               crossAxisCount: 3,
               mainAxisSpacing: 3,
-              itemCount: DataFeet.dataFeet.length,
+              itemCount: allFeet.length,
               staggeredTileBuilder: (i) {
                 var main = 0;
                 var cross = 0;
@@ -75,23 +74,16 @@ class FeetPageView extends FeetPageViewModel {
                 return GestureDetector(
                   onTap: () {
                     Navigator.of(context).push(
-                      routeTo(
-                        DetailFeet(
-                          avatar: DataFeet.dataFeet[i]['avatar'],
-                          name: DataFeet.dataFeet[i]['name'],
-                          time: DataFeet.dataFeet[i]['time'],
-                          comments: DataFeet.dataFeet[i]['comment'],
-                          likes: DataFeet.dataFeet[i]['likes'],
-                          image: DataFeet.dataFeet[i]['image'],
-                          caption: DataFeet.dataFeet[i]['caption'],
-                          view: DataFeet.dataFeet[i]['view'],
+                      routeToV(
+                        ScrollFeetPage(
+                          id: allFeet[i]['_id'],
                         ),
                       ),
                     );
                   },
                   child: Container(
-                    child: Image.asset(
-                      DataFeet.dataFeet[i]['image'],
+                    child: Image.network(
+                      allFeet[i]['imageLink'],
                       fit: BoxFit.cover,
                     ),
                   ),

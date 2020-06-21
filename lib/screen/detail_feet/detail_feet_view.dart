@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:instagramxflutter/helper/data/dataJson.dart';
 import 'package:instagramxflutter/helper/icon/icon_data.dart';
+import 'package:instagramxflutter/screen/detail_feet/widgets/feet_header.dart';
 import './detail_feet_view_model.dart';
 
 class DetailFeetView extends DetailFeetViewModel {
@@ -8,38 +9,36 @@ class DetailFeetView extends DetailFeetViewModel {
   Widget build(BuildContext context) {
     var screenSize = MediaQuery.of(context).size;
     return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          "Comments",
-          style: TextStyle(fontSize: screenSize.width * 0.05),
-        ),
-      ),
       floatingActionButton: commentSection(context, widget.id, inputComment),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      body: dataComment.length > 0
-          ? Container(
-              height: screenSize.height,
-              margin: EdgeInsets.only(bottom: screenSize.height * 0.07),
-              child: AnimatedList(
-                key: listKey,
-                padding: EdgeInsets.zero,
-                initialItemCount: dataComment.length,
-                itemBuilder: (context, i, Animation animation) {
-                  return FadeTransition(
-                    opacity: animation,
-                    child: listComments(context, dataComment[i]),
-                  );
-                },
-              ),
-            )
-          : Container(
-              child: Center(
-                child: Text(
-                  "Empty Comment",
-                  style: TextStyle(fontSize: screenSize.width * 0.05),
-                ),
+      body: CustomScrollView(
+        shrinkWrap: true,
+        slivers: <Widget>[
+          SliverAppBar(
+            title: titleFeet(context, widget),
+            pinned: false,
+            centerTitle: true,
+            expandedHeight: screenSize.height * 0.75,
+            flexibleSpace: FlexibleSpaceBar(
+              background: feetHeader(
+                context,
+                widget.avatar,
+                widget.name,
+                widget.time,
+                widget.image,
+                widget.likes,
+                widget.comments,
+                widget.caption,
               ),
             ),
+          ),
+          SliverList(
+            delegate: SliverChildListDelegate(dataComment
+                .map((item) => listComments(context, item))
+                .toList()),
+          ),
+        ],
+      ),
     );
   }
 
@@ -169,6 +168,9 @@ class DetailFeetView extends DetailFeetViewModel {
                     controller: comment,
                     maxLines: 5,
                     minLines: 1,
+                    onSubmitted: (value) {
+                      addComment();
+                    },
                     decoration: InputDecoration(
                       border: InputBorder.none,
                       hintText: "Add comment",

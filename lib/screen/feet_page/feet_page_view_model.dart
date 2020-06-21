@@ -1,4 +1,7 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:instagramxflutter/providers/provider_image.dart';
 import './feet_page.dart';
 
 abstract class FeetPageViewModel extends State<FeetPage> {
@@ -11,4 +14,22 @@ abstract class FeetPageViewModel extends State<FeetPage> {
     {"text": "Art"},
     {"text": "Style"},
   ];
+  List allFeet = [];
+
+  getAllFeet() {
+    ProviderImage.getAllImage().then((value) {
+      var jsonObject = jsonDecode(jsonEncode(value.data));
+      for (var item in jsonObject) {
+        setState(() {
+          allFeet.add(item);
+        });
+      }
+    });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    getAllFeet();
+  }
 }

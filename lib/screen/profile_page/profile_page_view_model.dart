@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:instagramxflutter/helper/preferences/preferences.dart';
 import 'package:instagramxflutter/providers/provider_image.dart';
 import 'package:instagramxflutter/providers/provider_user.dart';
 import './profile_page.dart';
@@ -10,6 +11,8 @@ abstract class ProfilePageViewModel extends State<ProfilePage> {
   double dataOffset = 0.0;
   List dataImageProfile = [];
   List dataProfile = [];
+  PreferencesData preferencesData = PreferencesData();
+  String username;
 
   void getImageProfile() {
     ProviderImage.getLoginProfileImage().then((value) {
@@ -34,6 +37,12 @@ abstract class ProfilePageViewModel extends State<ProfilePage> {
   @override
   void initState() {
     super.initState();
+
+    preferencesData.getToken().then((value) {
+      setState(() {
+        username = value;
+      });
+    });
     getImageProfile();
     getProfile();
   }

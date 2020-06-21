@@ -158,7 +158,7 @@ class HomePageView extends HomePageViewModel {
                                     name: item['user']['name'],
                                     avatar: item['user']['image'],
                                     time: item['createdAt'],
-                                    comments: item['like'],
+                                    comments: item['comment'],
                                     likes: item['like'],
                                     image: item['imageLink'],
                                     caption: item['caption'],

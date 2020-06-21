@@ -257,7 +257,7 @@ messageButton(BuildContext context) {
   );
 }
 
-headerControl(BuildContext context, data) {
+headerControl(BuildContext context, data, dataUser) {
   var screenSize = MediaQuery.of(context).size;
   return Container(
     margin: EdgeInsets.only(top: screenSize.height * 0.1),
@@ -277,17 +277,19 @@ headerControl(BuildContext context, data) {
           ),
         ),
         statsProfile(context, data),
-        Container(
-          width: screenSize.width,
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              followButton(context),
-              SizedBox(width: screenSize.width * 0.04),
-              messageButton(context)
-            ],
-          ),
-        ),
+        data['username'] != dataUser
+            ? Container(
+                width: screenSize.width,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    followButton(context),
+                    SizedBox(width: screenSize.width * 0.04),
+                    messageButton(context)
+                  ],
+                ),
+              )
+            : Container(),
       ],
     ),
   );

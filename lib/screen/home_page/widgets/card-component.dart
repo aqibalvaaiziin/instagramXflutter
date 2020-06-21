@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:instagramxflutter/helper/data/time_and_view_string.dart';
 import 'package:instagramxflutter/helper/icon/icon_data.dart';
 
 cardHeader(BuildContext context, data) {
@@ -42,7 +43,7 @@ cardHeader(BuildContext context, data) {
                       ),
                     ),
                     Text(
-                      "${data['createdAt'].toString()} min",
+                      "${HelperString.getTimeSinceUpload(data['createdAt'])} ago",
                       style: TextStyle(
                         fontSize: screenSize.width * 0.03,
                         color: Colors.grey[600],

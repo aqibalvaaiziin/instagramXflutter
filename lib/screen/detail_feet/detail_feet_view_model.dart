@@ -176,9 +176,7 @@ abstract class DetailFeetViewModel extends State<DetailFeet> {
   }
 
   void addComment() {
-    int index = dataComment.length;
     ProviderImageComment.addComment(widget.id, inputComment.text).then((_) {
-      listKey.currentState.insertItem(index, duration: Duration(seconds: 1));
       getAllComments();
     });
     setState(() {

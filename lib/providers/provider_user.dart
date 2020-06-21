@@ -4,8 +4,6 @@ import 'package:instagramxflutter/helper/preferences/preferences.dart';
 class ProviderUser {
   static BaseOptions options = new BaseOptions(
     baseUrl: "https://serviceinsta.herokuapp.com",
-    connectTimeout: 5000,
-    receiveTimeout: 3000,
   );
   static PreferencesData preferencesData = PreferencesData();
   static Dio dio = Dio(options);
