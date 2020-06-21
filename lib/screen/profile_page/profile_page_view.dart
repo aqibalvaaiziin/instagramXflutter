@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:instagramxflutter/helper/data/dataJson.dart';
+import 'package:flutter_icons/flutter_icons.dart';
 import 'package:instagramxflutter/screen/detail_feet/detail_feet.dart';
 import 'package:instagramxflutter/screen/profile_page/widgets/all_header_widgets.dart';
 import 'package:instagramxflutter/screen/profile_page/widgets/grid_data.dart';
@@ -29,41 +29,70 @@ class ProfilePageView extends ProfilePageViewModel {
             controller: scrollController,
             slivers: <Widget>[
               SliverAppBar(
-                title: dataTitle(context, dataOffset > screenSize.height * 0.2),
+                title: dataTitle(context, dataOffset > screenSize.height * 0.2,
+                    dataProfile[0]),
                 pinned: true,
                 expandedHeight: screenSize.height * 0.43,
                 flexibleSpace: FlexibleSpaceBar(
-                  background: headerControl(context),
+                  background: headerControl(context, dataProfile[0]),
                 ),
               ),
-              SliverGrid.count(
-                crossAxisSpacing: 3,
-                mainAxisSpacing: 3,
-                crossAxisCount: 3,
-                children: DataFeet.dataFeet
-                    .map(
-                      (item) => GestureDetector(
-                        onTap: () {
-                          Navigator.of(context).push(
-                            routeTo(
-                              DetailFeet(
-                                avatar: item['avatar'],
-                                name: item['name'],
-                                time: item['time'],
-                                comments: item['comment'],
-                                likes: item['likes'],
-                                image: item['image'],
-                                caption: item['caption'],
-                                view: item['view'],
-                              ),
+              dataImageProfile.length > 0
+                  ? SliverGrid.count(
+                      crossAxisSpacing: 3,
+                      mainAxisSpacing: 3,
+                      crossAxisCount: 3,
+                      children: dataImageProfile
+                          .map(
+                            (item) => GestureDetector(
+                              onTap: () {
+                                Navigator.of(context).push(
+                                  routeTo(
+                                    DetailFeet(
+                                      id: item['_id'],
+                                      name: item['user']['name'],
+                                      avatar: item['user']['image'],
+                                      time: item['createdAt'],
+                                      comments: item['like'],
+                                      likes: item['like'],
+                                      image: item['imageLink'],
+                                      caption: item['caption'],
+                                      view: item['view'],
+                                    ),
+                                  ),
+                                );
+                              },
+                              child: dataFeet(context, item),
                             ),
-                          );
-                        },
-                        child: dataFeet(context, item),
-                      ),
+                          )
+                          .toList(),
                     )
-                    .toList(),
-              ),
+                  : SliverList(
+                      delegate: SliverChildListDelegate([
+                        Container(
+                          width: screenSize.width,
+                          height: screenSize.height * 0.3,
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: <Widget>[
+                              Icon(
+                                FontAwesome.camera,
+                                size: screenSize.width * 0.2,
+                                color: Colors.white,
+                              ),
+                              Container(
+                                child: Text(
+                                  "No post available",
+                                  style: TextStyle(
+                                      fontSize: screenSize.width * 0.05),
+                                ),
+                              ),
+                            ],
+                          ),
+                        )
+                      ]),
+                    ),
             ],
           ),
           onNotification: (notification) {

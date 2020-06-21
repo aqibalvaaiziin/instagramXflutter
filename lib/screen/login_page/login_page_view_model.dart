@@ -52,6 +52,7 @@ abstract class LoginPageViewModel extends State<LoginPage> {
               var jsonObject = jsonDecode(jsonEncode(value.data));
               if (value.statusCode == 200) {
                 preferencesData.setToken(jsonObject['token']);
+                preferencesData.setUsername(username.text);
                 Navigator.of(context)
                     .pushReplacement(routeToV(NavigatorPage()));
               } else {

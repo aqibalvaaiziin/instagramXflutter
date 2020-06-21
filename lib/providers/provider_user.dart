@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:instagramxflutter/helper/preferences/preferences.dart';
 
 class ProviderUser {
   static BaseOptions options = new BaseOptions(
@@ -6,6 +7,7 @@ class ProviderUser {
     connectTimeout: 5000,
     receiveTimeout: 3000,
   );
+  static PreferencesData preferencesData = PreferencesData();
   static Dio dio = Dio(options);
   static Response response;
   static Future login(String username, String password) async {
@@ -23,5 +25,10 @@ class ProviderUser {
         print(e.message);
       }
     }
+  }
+
+  static Future getUserLoginProfile() async {
+    String username = await preferencesData.getUsername();
+    return dio.get("/user/$username");
   }
 }

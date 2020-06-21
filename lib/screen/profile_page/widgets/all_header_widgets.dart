@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:instagramxflutter/helper/icon/icon_data.dart';
 
-imageProfile(BuildContext context) {
+imageProfile(BuildContext context, data) {
   var screenSize = MediaQuery.of(context).size;
   return Column(
     children: <Widget>[
@@ -11,8 +11,8 @@ imageProfile(BuildContext context) {
         decoration: BoxDecoration(
           borderRadius: BorderRadius.all(Radius.circular(15)),
           image: DecorationImage(
-            image: AssetImage(
-              "assets/images/avatar/woman2.jpg",
+            image: NetworkImage(
+              data['image'],
             ),
             fit: BoxFit.fitWidth,
           ),
@@ -29,7 +29,7 @@ imageProfile(BuildContext context) {
   );
 }
 
-descProfile(BuildContext context) {
+descProfile(BuildContext context, data) {
   var screenSize = MediaQuery.of(context).size;
   return Container(
     child: Column(
@@ -41,7 +41,7 @@ descProfile(BuildContext context) {
               Container(
                 margin: EdgeInsets.only(left: screenSize.width * 0.02),
                 child: Text(
-                  "Federica Sarawana",
+                  data['name'],
                   style: TextStyle(
                     fontSize: screenSize.width * 0.06,
                     fontWeight: FontWeight.w600,
@@ -56,7 +56,7 @@ descProfile(BuildContext context) {
           padding: EdgeInsets.only(left: screenSize.width * 0.02),
           width: screenSize.width * 0.6,
           child: Text(
-            "facere sunt voluptatibus corrupti incidunt, maxime aspernatur error? Sequi sit consectetur minima doloremque? Dignissimos minus sunt rem quaerat.",
+            data['desc'],
             maxLines: 3,
             style: TextStyle(
                 color: Colors.grey,
@@ -76,14 +76,14 @@ descProfile(BuildContext context) {
               ),
               SizedBox(width: screenSize.width * 0.01),
               Text(
-                "Paris, ",
+                data['location'],
                 style: TextStyle(
                   fontStyle: FontStyle.italic,
                   fontSize: screenSize.width * 0.035,
                 ),
               ),
               Text(
-                " France",
+                data['location'],
                 style: TextStyle(
                     fontStyle: FontStyle.italic,
                     fontSize: screenSize.width * 0.035,
@@ -97,7 +97,7 @@ descProfile(BuildContext context) {
   );
 }
 
-statsProfile(BuildContext context) {
+statsProfile(BuildContext context, data) {
   var screenSize = MediaQuery.of(context).size;
   return Container(
     margin: EdgeInsets.only(
@@ -126,7 +126,7 @@ statsProfile(BuildContext context) {
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: <Widget>[
                       Text(
-                        "8",
+                        data['posted'].toString(),
                         style: TextStyle(
                           fontSize: screenSize.width * 0.05,
                           fontWeight: FontWeight.bold,
@@ -149,7 +149,7 @@ statsProfile(BuildContext context) {
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: <Widget>[
                       Text(
-                        "102K",
+                        data['follower'].toString(),
                         style: TextStyle(
                           fontSize: screenSize.width * 0.05,
                           fontWeight: FontWeight.bold,
@@ -172,7 +172,7 @@ statsProfile(BuildContext context) {
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: <Widget>[
                       Text(
-                        "100",
+                        data['following'].toString(),
                         style: TextStyle(
                           fontSize: screenSize.width * 0.05,
                           fontWeight: FontWeight.bold,
@@ -257,7 +257,7 @@ messageButton(BuildContext context) {
   );
 }
 
-headerControl(BuildContext context) {
+headerControl(BuildContext context, data) {
   var screenSize = MediaQuery.of(context).size;
   return Container(
     margin: EdgeInsets.only(top: screenSize.height * 0.1),
@@ -271,12 +271,12 @@ headerControl(BuildContext context) {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: <Widget>[
-              descProfile(context),
-              imageProfile(context),
+              descProfile(context, data),
+              imageProfile(context, data),
             ],
           ),
         ),
-        statsProfile(context),
+        statsProfile(context, data),
         Container(
           width: screenSize.width,
           child: Row(
@@ -293,7 +293,7 @@ headerControl(BuildContext context) {
   );
 }
 
-dataTitle(BuildContext context, bool data) {
+dataTitle(BuildContext context, bool data, name) {
   var screenSize = MediaQuery.of(context).size;
   return Container(
     width: screenSize.width,
@@ -313,7 +313,7 @@ dataTitle(BuildContext context, bool data) {
           duration: Duration(milliseconds: 300),
           child: Container(
             child: Text(
-              data ? "Federica Sarawana" : "            ",
+              data ? name['username'] : "            ",
               style: TextStyle(
                 fontSize: screenSize.width * 0.06,
                 fontWeight: FontWeight.w600,

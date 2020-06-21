@@ -6,7 +6,7 @@ Widget dataFeet(BuildContext context, data) {
     width: screenSize.width * 0.1,
     height: screenSize.width * 0.1,
     child: Image.network(
-      data['image'],
+      data['imageLink'],
       fit: BoxFit.cover,
     ),
   );

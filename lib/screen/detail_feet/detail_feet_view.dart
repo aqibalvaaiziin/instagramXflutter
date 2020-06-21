@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:instagramxflutter/helper/data/dataJson.dart';
 import 'package:instagramxflutter/helper/icon/icon_data.dart';
-import 'package:instagramxflutter/providers/provider_image_comment.dart';
 import './detail_feet_view_model.dart';
 
 class DetailFeetView extends DetailFeetViewModel {
