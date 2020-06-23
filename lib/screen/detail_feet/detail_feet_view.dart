@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:instagramxflutter/helper/data/dataJson.dart';
+import 'package:instagramxflutter/helper/data/time_and_view_string.dart';
 import 'package:instagramxflutter/helper/icon/icon_data.dart';
 import 'package:instagramxflutter/screen/detail_feet/widgets/feet_header.dart';
 import './detail_feet_view_model.dart';
@@ -12,13 +13,12 @@ class DetailFeetView extends DetailFeetViewModel {
       floatingActionButton: commentSection(context, widget.id, inputComment),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       body: CustomScrollView(
-        shrinkWrap: true,
         slivers: <Widget>[
           SliverAppBar(
             title: titleFeet(context, widget),
-            pinned: false,
+            pinned: true,
             centerTitle: true,
-            expandedHeight: screenSize.height * 0.75,
+            expandedHeight: screenSize.height * 0.73,
             flexibleSpace: FlexibleSpaceBar(
               background: feetHeader(
                 context,
@@ -33,9 +33,35 @@ class DetailFeetView extends DetailFeetViewModel {
             ),
           ),
           SliverList(
-            delegate: SliverChildListDelegate(dataComment
-                .map((item) => listComments(context, item))
-                .toList()),
+            delegate: SliverChildListDelegate(
+              dataComment.length > 0
+                  ? [
+                      Container(
+                        width: screenSize.width,
+                        height: screenSize.height * 0.9,
+                        child: ListView.builder(
+                            padding: EdgeInsets.zero,
+                            itemCount: dataComment.length,
+                            itemBuilder: (context, i) {
+                              return listComments(context, dataComment[i]);
+                            }),
+                      )
+                    ]
+                  : [
+                      Container(
+                        width: screenSize.width,
+                        height: screenSize.height * 0.15,
+                        child: Center(
+                          child: Text(
+                            "Comment is empty",
+                            style: TextStyle(fontSize: screenSize.width * 0.05),
+                          ),
+                        ),
+                      )
+                    ],
+              addAutomaticKeepAlives: false,
+              addRepaintBoundaries: false,
+            ),
           ),
         ],
       ),
@@ -85,7 +111,7 @@ class DetailFeetView extends DetailFeetViewModel {
           child: Row(
             children: <Widget>[
               Text(
-                "${data['createdAt']} min",
+                "${HelperString.getTimeSinceUpload(data['createdAt'])} ago",
                 style: TextStyle(
                   fontSize: screenSize.width * 0.03,
                 ),

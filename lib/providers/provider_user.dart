@@ -25,8 +25,9 @@ class ProviderUser {
     }
   }
 
-  static Future getUserLoginProfile() async {
-    String username = await preferencesData.getUsername();
+
+  static Future getUserProfile(username) async {
     return dio.get("/user/$username");
   }
+
 }

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:instagramxflutter/helper/data/time_and_view_string.dart';
 import 'package:instagramxflutter/helper/icon/icon_data.dart';
+import 'package:instagramxflutter/screen/profile_page/profile_page.dart';
+import 'package:instagramxflutter/widgets/route_animation.dart';
 
 cardHeader(BuildContext context, data) {
   var screenSize = MediaQuery.of(context).size;
@@ -9,50 +11,58 @@ cardHeader(BuildContext context, data) {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
-        Container(
-          padding: EdgeInsets.only(
-            left: screenSize.width * 0.07,
-            top: screenSize.height * 0.02,
-          ),
-          child: Row(
-            children: <Widget>[
-              Container(
-                width: screenSize.width * 0.12,
-                height: screenSize.width * 0.12,
-                decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  image: DecorationImage(
-                      image: NetworkImage(
-                        data['user']['image'],
-                      ),
-                      fit: BoxFit.cover),
+        GestureDetector(
+          onTap: () {
+            Navigator.of(context).push(routeTo(ProfilePage(
+              username: data['user']['username'],
+              isMe: false,
+            )));
+          },
+          child: Container(
+            padding: EdgeInsets.only(
+              left: screenSize.width * 0.07,
+              top: screenSize.height * 0.02,
+            ),
+            child: Row(
+              children: <Widget>[
+                Container(
+                  width: screenSize.width * 0.12,
+                  height: screenSize.width * 0.12,
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    image: DecorationImage(
+                        image: NetworkImage(
+                          data['user']['image'],
+                        ),
+                        fit: BoxFit.cover),
+                  ),
                 ),
-              ),
-              SizedBox(width: screenSize.width * 0.02),
-              Container(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    Text(
-                      data['user']['name'],
-                      style: TextStyle(
-                        fontSize: screenSize.width * 0.04,
-                        color: Colors.black,
-                        fontWeight: FontWeight.w700,
+                SizedBox(width: screenSize.width * 0.02),
+                Container(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      Text(
+                        data['user']['name'],
+                        style: TextStyle(
+                          fontSize: screenSize.width * 0.04,
+                          color: Colors.black,
+                          fontWeight: FontWeight.w700,
+                        ),
                       ),
-                    ),
-                    Text(
-                      "${HelperString.getTimeSinceUpload(data['createdAt'])} ago",
-                      style: TextStyle(
-                        fontSize: screenSize.width * 0.03,
-                        color: Colors.grey[600],
-                      ),
-                    )
-                  ],
+                      Text(
+                        "${HelperString.getTimeSinceUpload(data['createdAt'])} ago",
+                        style: TextStyle(
+                          fontSize: screenSize.width * 0.03,
+                          color: Colors.grey[600],
+                        ),
+                      )
+                    ],
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
         Container(

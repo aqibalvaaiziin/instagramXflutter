@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_icons/flutter_icons.dart';
 import 'package:instagramxflutter/helper/data/dataJson.dart';
 import 'package:instagramxflutter/helper/icon/icon_data.dart';
 import 'package:instagramxflutter/screen/detail_feet/detail_feet.dart';
 import 'package:instagramxflutter/screen/home_page/widgets/card-component.dart';
 import 'package:instagramxflutter/screen/home_page/widgets/sotry.dart';
+import 'package:instagramxflutter/widgets/helper_widget.dart';
 import '../../widgets/route_animation.dart';
 import './home_page_view_model.dart';
 
@@ -126,52 +128,71 @@ class HomePageView extends HomePageViewModel {
                                 ],
                               ),
                             ),
-                            Expanded(
-                              child: ListView.builder(
-                                scrollDirection: Axis.horizontal,
-                                itemCount: DataStory.dataStory.length,
-                                itemBuilder: (context, i) {
-                                  return dataStory(
-                                    context,
-                                    DataStory.dataStory[i]['image'],
-                                    DataStory.dataStory[i]['name'],
-                                    true,
-                                    DataStory.dataStory[i]['id'],
-                                  );
-                                },
-                              ),
-                            ),
+                            // Expanded(
+                            //   child: ListView.builder(
+                            //     scrollDirection: Axis.horizontal,
+                            //     itemCount: DataStory.dataStory.length,
+                            //     itemBuilder: (context, i) {
+                            //       return dataStory(
+                            //         context,
+                            //         DataStory.dataStory[i]['image'],
+                            //         DataStory.dataStory[i]['name'],
+                            //         true,
+                            //         DataStory.dataStory[i]['id'],
+                            //       );
+                            //     },
+                            //   ),
+                            // ),
                           ],
                         ),
                       ),
                     ),
                   ),
-                  SliverList(
-                    delegate: SliverChildListDelegate(dataImage
-                        .map(
-                          (item) => GestureDetector(
-                            onTap: () {
-                              Navigator.of(context).push(
-                                routeTo(
-                                  DetailFeet(
-                                    id: item['_id'],
-                                    name: item['user']['name'],
-                                    avatar: item['user']['image'],
-                                    time: item['createdAt'],
-                                    comments: item['comment'],
-                                    likes: item['like'],
-                                    image: item['imageLink'],
-                                    caption: item['caption'],
-                                    view: item['view'],
-                                  ),
+                  dataImage.length > 0
+                      ? SliverList(
+                          delegate: SliverChildListDelegate(dataImage
+                              .map(
+                                (item) => GestureDetector(
+                                  onTap: () {
+                                    Navigator.of(context).push(
+                                      routeTo(
+                                        DetailFeet(
+                                          id: item['_id'],
+                                          name: item['user']['name'],
+                                          avatar: item['user']['image'],
+                                          time: item['createdAt'],
+                                          comments: item['comment'],
+                                          likes: item['like'],
+                                          image: item['imageLink'],
+                                          caption: item['caption'],
+                                          view: item['view'],
+                                        ),
+                                      ),
+                                    );
+                                  },
+                                  child: datafeet(context, item),
                                 ),
-                              );
-                            },
-                            child: datafeet(context, item),
-                          ),
+                              )
+                              .toList()),
                         )
-                        .toList()),
-                  ),
+                      : SliverList(
+                          delegate: SliverChildListDelegate([
+                          Center(
+                            child: Column(
+                              children: <Widget>[
+                                Icon(
+                                  FontAwesome.user_times,
+                                  size: screenSize.width * 0.3,
+                                ),
+                                Text(
+                                  "You not have a friend in Instagram",
+                                  style: TextStyle(
+                                      fontSize: screenSize.width * 0.05),
+                                )
+                              ],
+                            ),
+                          )
+                        ])),
                 ],
               )
             : Container(
@@ -221,18 +242,19 @@ class HomePageView extends HomePageViewModel {
                     child: Row(
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: <Widget>[
-                        IconButton(
-                          icon: CustomIcon.favourite(
+                        InkWell(
+                          child: CustomIcon.favourite(
                             statusIcon: isfav,
                             size: screenSize.width * 0.055,
                             statusColor: isfav,
                           ),
-                          onPressed: () {
+                          onTap: () {
                             setState(() {
                               isfav = !isfav;
                             });
                           },
                         ),
+                        SizedBox(width: screenSize.width * 0.015),
                         Text(
                           data['like'].toString(),
                           style: TextStyle(
@@ -241,14 +263,14 @@ class HomePageView extends HomePageViewModel {
                             fontWeight: FontWeight.w500,
                           ),
                         ),
-                        SizedBox(width: screenSize.width * 0.03),
+                        SizedBox(width: screenSize.width * 0.04),
                         CustomIcon.comment(
                           size: screenSize.width * 0.055,
                           color: Colors.black,
                         ),
-                        SizedBox(width: screenSize.width * 0.02),
+                        SizedBox(width: screenSize.width * 0.018),
                         Text(
-                          data['view'].toString(),
+                          data['comment'].toString(),
                           style: TextStyle(
                             color: Colors.black,
                             fontSize: screenSize.width * 0.04,
@@ -269,6 +291,11 @@ class HomePageView extends HomePageViewModel {
                       onPressed: () {
                         setState(() {
                           isbooked = !isbooked;
+                          if (isbooked) {
+                            toastMessage("Feet saved", Colors.grey[600]);
+                          } else {
+                            toastMessage("Feet unsaved", Colors.grey[600]);
+                          }
                         });
                       },
                     ),

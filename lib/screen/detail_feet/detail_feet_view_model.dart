@@ -189,4 +189,9 @@ abstract class DetailFeetViewModel extends State<DetailFeet> {
     super.initState();
     getAllComments();
   }
+
+  @override
+  void dispose() {
+    super.dispose();
+  }
 }

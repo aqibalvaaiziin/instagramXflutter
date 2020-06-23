@@ -12,7 +12,7 @@ imageProfile(BuildContext context, data) {
           borderRadius: BorderRadius.all(Radius.circular(15)),
           image: DecorationImage(
             image: NetworkImage(
-              data['image'],
+              data['user']['image'],
             ),
             fit: BoxFit.fitWidth,
           ),
@@ -41,7 +41,7 @@ descProfile(BuildContext context, data) {
               Container(
                 margin: EdgeInsets.only(left: screenSize.width * 0.02),
                 child: Text(
-                  data['name'],
+                  data['user']['name'],
                   style: TextStyle(
                     fontSize: screenSize.width * 0.06,
                     fontWeight: FontWeight.w600,
@@ -56,7 +56,7 @@ descProfile(BuildContext context, data) {
           padding: EdgeInsets.only(left: screenSize.width * 0.02),
           width: screenSize.width * 0.6,
           child: Text(
-            data['desc'],
+            data['user']['desc'],
             maxLines: 3,
             style: TextStyle(
                 color: Colors.grey,
@@ -76,14 +76,14 @@ descProfile(BuildContext context, data) {
               ),
               SizedBox(width: screenSize.width * 0.01),
               Text(
-                data['location'],
+                data['user']['location'],
                 style: TextStyle(
                   fontStyle: FontStyle.italic,
                   fontSize: screenSize.width * 0.035,
                 ),
               ),
               Text(
-                data['location'],
+                data['user']['location'],
                 style: TextStyle(
                     fontStyle: FontStyle.italic,
                     fontSize: screenSize.width * 0.035,
@@ -126,7 +126,7 @@ statsProfile(BuildContext context, data) {
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: <Widget>[
                       Text(
-                        data['posted'].toString(),
+                        data['user']['posted'].toString(),
                         style: TextStyle(
                           fontSize: screenSize.width * 0.05,
                           fontWeight: FontWeight.bold,
@@ -149,7 +149,7 @@ statsProfile(BuildContext context, data) {
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: <Widget>[
                       Text(
-                        data['follower'].toString(),
+                        data['user']['follower'].toString(),
                         style: TextStyle(
                           fontSize: screenSize.width * 0.05,
                           fontWeight: FontWeight.bold,
@@ -172,7 +172,7 @@ statsProfile(BuildContext context, data) {
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: <Widget>[
                       Text(
-                        data['following'].toString(),
+                        data['user']['following'].toString(),
                         style: TextStyle(
                           fontSize: screenSize.width * 0.05,
                           fontWeight: FontWeight.bold,
@@ -277,7 +277,7 @@ headerControl(BuildContext context, data, dataUser) {
           ),
         ),
         statsProfile(context, data),
-        data['username'] != dataUser
+        data['user']['username'] != dataUser
             ? Container(
                 width: screenSize.width,
                 child: Row(
@@ -315,7 +315,7 @@ dataTitle(BuildContext context, bool data, name) {
           duration: Duration(milliseconds: 300),
           child: Container(
             child: Text(
-              data ? name['username'] : "            ",
+              data ? name['user']['name'] : "            ",
               style: TextStyle(
                 fontSize: screenSize.width * 0.06,
                 fontWeight: FontWeight.w600,

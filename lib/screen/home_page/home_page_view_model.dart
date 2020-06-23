@@ -12,8 +12,8 @@ abstract class HomePageViewModel extends State<HomePage> {
   bool contains = false;
   List dataImage = [];
 
-  getImageContent() {
-    ProviderImage.getAllImage().then((value) {
+  getImageContentByFollowing() {
+    ProviderImage.getDataImageByFollow().then((value) {
       var jsonObject = jsonDecode(jsonEncode(value.data));
       setState(() {
         for (var i = 0; i < jsonObject.length; i++) {
@@ -25,9 +25,10 @@ abstract class HomePageViewModel extends State<HomePage> {
     });
   }
 
+ 
   @override
   void initState() {
     super.initState();
-    getImageContent();
+    getImageContentByFollowing();
   }
 }

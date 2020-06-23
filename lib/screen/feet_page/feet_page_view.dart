@@ -77,6 +77,7 @@ class FeetPageView extends FeetPageViewModel {
                       routeToV(
                         ScrollFeetPage(
                           id: allFeet[i]['_id'],
+                          from: "imageFeet",
                         ),
                       ),
                     );

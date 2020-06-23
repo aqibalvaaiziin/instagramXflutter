@@ -21,10 +21,17 @@ class ProviderImage {
     return await dio.get("/image/$id");
   }
 
-  static Future getLoginProfileImage() async {
+
+  
+  static Future getProfileImage(String username) async {
     String token = await preferencesData.getToken();
-    String username = await preferencesData.getUsername();
     dio.options.headers['Authorization'] = "bearer $token";
     return await dio.get("/image/by-user/$username");
+  }
+
+  static Future getDataImageByFollow() async {
+    String token = await preferencesData.getToken();
+    dio.options.headers['Authorization'] = "bearer $token";
+    return await dio.get("/image/get/following");
   }
 }

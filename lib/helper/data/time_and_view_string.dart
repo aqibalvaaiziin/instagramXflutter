@@ -36,7 +36,7 @@ class HelperString {
       if (minutes >= 2) minute = " minutes";
       return minutes.toInt().toString() + minute;
     } else {
-      return "a few minutes ago";
+      return "a few minutes";
     }
   }
 

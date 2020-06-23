@@ -86,18 +86,19 @@ class ScrollFeetPageView extends ScrollFeetPageViewModel {
                     child: Row(
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: <Widget>[
-                        IconButton(
-                          icon: CustomIcon.favourite(
+                        InkWell(
+                          child: CustomIcon.favourite(
                             statusIcon: isfav,
                             size: screenSize.width * 0.055,
                             statusColor: isfav,
                           ),
-                          onPressed: () {
+                          onTap: () {
                             setState(() {
                               isfav = !isfav;
                             });
                           },
                         ),
+                        SizedBox(width: screenSize.width * 0.015),
                         Text(
                           data['like'].toString(),
                           style: TextStyle(
@@ -106,14 +107,14 @@ class ScrollFeetPageView extends ScrollFeetPageViewModel {
                             fontWeight: FontWeight.w500,
                           ),
                         ),
-                        SizedBox(width: screenSize.width * 0.03),
+                        SizedBox(width: screenSize.width * 0.04),
                         CustomIcon.comment(
                           size: screenSize.width * 0.055,
                           color: Colors.black,
                         ),
-                        SizedBox(width: screenSize.width * 0.02),
+                        SizedBox(width: screenSize.width * 0.018),
                         Text(
-                          data['view'].toString(),
+                          data['comment'].toString(),
                           style: TextStyle(
                             color: Colors.black,
                             fontSize: screenSize.width * 0.04,

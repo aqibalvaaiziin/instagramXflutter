@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_icons/flutter_icons.dart';
-import 'package:instagramxflutter/screen/detail_feet/detail_feet.dart';
 import 'package:instagramxflutter/screen/profile_page/widgets/all_header_widgets.dart';
 import 'package:instagramxflutter/screen/profile_page/widgets/grid_data.dart';
+import 'package:instagramxflutter/screen/scroll_feet_page/scroll_feet_page.dart';
 import 'package:instagramxflutter/widgets/route_animation.dart';
 import './profile_page_view_model.dart';
 
@@ -25,7 +25,7 @@ class ProfilePageView extends ProfilePageViewModel {
         left: false,
         right: false,
         child: NotificationListener<ScrollUpdateNotification>(
-          child: dataProfile.length == 0 && dataImageProfile.length == 0
+          child: dataImageProfile.length == 0
               ? Center(
                   child: CircularProgressIndicator(),
                 )
@@ -33,23 +33,21 @@ class ProfilePageView extends ProfilePageViewModel {
                   controller: scrollController,
                   slivers: <Widget>[
                     SliverAppBar(
-                      title: dataProfile.length > 0
+                      title: widget.isMe
                           ? dataTitle(
                               context,
                               dataOffset > screenSize.height * 0.2,
-                              dataProfile[0])
+                              dataImageProfile[0],
+                            )
                           : SizedBox(),
                       pinned: true,
-                      expandedHeight: dataProfile[0]['username'] != username
-                          ? screenSize.height * 0.43
-                          : screenSize.height * 0.37,
+                      expandedHeight:
+                          dataImageProfile[0]['user']['username'] != username
+                              ? screenSize.height * 0.43
+                              : screenSize.height * 0.378,
                       flexibleSpace: FlexibleSpaceBar(
-                        background: dataProfile.length > 0
-                            ? headerControl(context, dataProfile[0], username)
-                            : Center(
-                                child: CircularProgressIndicator(),
-                              ),
-                      ),
+                          background: headerControl(
+                              context, dataImageProfile[0], username)),
                     ),
                     dataImageProfile.length > 0
                         ? SliverGrid.count(
@@ -61,9 +59,8 @@ class ProfilePageView extends ProfilePageViewModel {
                                     onTap: () {
                                       Navigator.of(context).push(
                                         routeTo(
-                                          DetailFeet(
-                                            id: item['_id'],
-                                          ),
+                                          ScrollFeetPage(
+                                              id: item['_id'], from: "profile"),
                                         ),
                                       );
                                     },
