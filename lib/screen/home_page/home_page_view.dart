@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
-import 'package:instagramxflutter/helper/data/dataJson.dart';
 import 'package:instagramxflutter/helper/icon/icon_data.dart';
 import 'package:instagramxflutter/screen/detail_feet/detail_feet.dart';
 import 'package:instagramxflutter/screen/home_page/widgets/card-component.dart';

@@ -38,10 +38,6 @@ usernameForm(BuildContext context, username) {
         fillColor: Colors.white,
         focusColor: Colors.white,
         hintText: "Username",
-        labelStyle: TextStyle(
-          color: Colors.white,
-          fontSize: screenSize.width * 0.04,
-        ),
       ),
     ),
   );

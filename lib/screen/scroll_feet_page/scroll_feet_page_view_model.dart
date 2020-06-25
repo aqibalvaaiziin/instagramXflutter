@@ -8,29 +8,33 @@ import './scroll_feet_page.dart';
 abstract class ScrollFeetPageViewModel extends State<ScrollFeetPage> {
   bool isfav = false;
   bool isbooked = false;
-  List allImageData = [];
+  List<Map> allImageData = List();
   PreferencesData preferencesData = PreferencesData();
+  var selectedItem;
+  var temp;
 
   getAllImage() {
     allImageData.clear();
-    ProviderImage.getOneImage(widget.id).then((value) {
-      var jsonObject2 = jsonDecode(jsonEncode(value.data));
-      for (var item in jsonObject2) {
-        setState(() {
-          allImageData.add(item);
-        });
-      }
-    });
+    // ProviderImage.getOneImage(widget.id).then((value) {
+    //   var jsonObject2 = jsonDecode(jsonEncode(value.data));
+    //   for (var item in jsonObject2) {
+    //     setState(() {
+    //       allImageData.add(item);
+    //     });
+    //   }
+    // });
 
     ProviderImage.getAllImage().then((value) {
-      var jsonObject = jsonDecode(jsonEncode(value.data));
+      List<Map> jsonObject = List.from(value.data);
       Future.delayed(Duration(milliseconds: 100), () {
         setState(() {
-          for (var i = 0; i < jsonObject.length; i++) {
-            allImageData.add(jsonObject[i]);
-            allImageData.remove(widget.id == jsonObject[i]['_id']);
-          }
+          selectedItem = jsonObject.where((item) => item['_id'] == widget.id);
+          allImageData =
+              jsonObject.where((item) => item['_id'] != selectedItem['_id']);
+          allImageData.insert(0, selectedItem);
+          print(selectedItem.toString());
         });
+        print(allImageData);
       });
     });
   }

@@ -36,8 +36,10 @@ abstract class LoginPageViewModel extends State<LoginPage> {
     var screenSize = MediaQuery.of(context).size;
     return Container(
       width: screenSize.width * 0.85,
+      height: screenSize.height * 0.075,
       decoration: BoxDecoration(
         color: Colors.blue[700],
+        borderRadius: BorderRadius.all(Radius.circular(screenSize.width * 0.01))
       ),
       child: MaterialButton(
         padding: EdgeInsets.zero,
