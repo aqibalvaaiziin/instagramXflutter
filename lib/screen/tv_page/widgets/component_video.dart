@@ -11,8 +11,8 @@ buttonControl(BuildContext context, String avatar, int likes, int comment) {
       mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: <Widget>[
         Container(
-          width: screenSize.width * 0.155,
-          height: screenSize.width * 0.155,
+          width: screenSize.width * 0.15,
+          height: screenSize.width * 0.15,
           decoration: BoxDecoration(
             color: Colors.white,
             shape: BoxShape.circle,
@@ -24,7 +24,7 @@ buttonControl(BuildContext context, String avatar, int likes, int comment) {
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
                 image: DecorationImage(
-                  image: AssetImage(
+                  image: NetworkImage(
                     avatar,
                   ),
                   fit: BoxFit.fill,

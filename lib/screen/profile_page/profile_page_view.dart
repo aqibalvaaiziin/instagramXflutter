@@ -33,6 +33,7 @@ class ProfilePageView extends ProfilePageViewModel {
                   controller: scrollController,
                   slivers: <Widget>[
                     SliverAppBar(
+                      automaticallyImplyLeading: widget.isMe ? false : true,
                       title: widget.isMe
                           ? dataTitle(
                               context,
@@ -41,13 +42,12 @@ class ProfilePageView extends ProfilePageViewModel {
                             )
                           : SizedBox(),
                       pinned: true,
-                      expandedHeight:
-                          dataImageProfile[0]['user']['username'] != username
-                              ? screenSize.height * 0.43
-                              : screenSize.height * 0.378,
+                      expandedHeight: !widget.isMe
+                          ? screenSize.height * 0.43
+                          : screenSize.height * 0.378,
                       flexibleSpace: FlexibleSpaceBar(
                           background: headerControl(
-                              context, dataImageProfile[0], username)),
+                              context, dataImageProfile[0], widget.isMe)),
                     ),
                     dataImageProfile.length > 0
                         ? SliverGrid.count(

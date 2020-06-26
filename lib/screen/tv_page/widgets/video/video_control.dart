@@ -13,7 +13,7 @@ class AnimationPlayerDataManager {
   AnimationPlayerDataManager(this.flickManager, this.items);
 
   playNextVideo([Duration duration]) {
-    String nextVideoUrl = items[currentIndex + 1]['video'];
+    String nextVideoUrl = items[currentIndex + 1]['videoLink'];
 
     if (currentIndex != items.length - 1) {
       if (duration != null) {
@@ -37,7 +37,7 @@ class AnimationPlayerDataManager {
 
   playPreviousVideo([Duration duration]) {
     if (currentIndex > 0) {
-      String prevVideo = items[currentIndex - 1]['video'];
+      String prevVideo = items[currentIndex - 1]['videoLink'];
 
       if (currentIndex != items.length) {
         if (duration != null) {
@@ -48,14 +48,14 @@ class AnimationPlayerDataManager {
           currentIndex--;
         }
 
-        flickManager.handleChangeVideo(
-          VideoPlayerController.network(prevVideo),
-          videoChangeDuration: duration, timerCancelCallback: (bool playNext) {
-        videoChangeTimer.cancel();
-        if (playNext) {
-          currentIndex--;
-        }
-      });
+        flickManager.handleChangeVideo(VideoPlayerController.network(prevVideo),
+            videoChangeDuration: duration,
+            timerCancelCallback: (bool playNext) {
+          videoChangeTimer.cancel();
+          if (playNext) {
+            currentIndex--;
+          }
+        });
       }
     }
   }

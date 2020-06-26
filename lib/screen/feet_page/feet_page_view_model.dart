@@ -19,11 +19,11 @@ abstract class FeetPageViewModel extends State<FeetPage> {
   getAllFeet() {
     ProviderImage.getAllImage().then((value) {
       var jsonObject = jsonDecode(jsonEncode(value.data));
-      setState(() {
-        for (var item in jsonObject) {
+      for (var item in jsonObject) {
+        setState(() {
           allFeet.add(item);
-        }
-      });
+        });
+      }
     });
   }
 

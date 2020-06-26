@@ -20,7 +20,7 @@ cardHeader(BuildContext context, data) {
           },
           child: Container(
             padding: EdgeInsets.only(
-              left: screenSize.width * 0.07,
+              left: screenSize.width * 0.03,
               top: screenSize.height * 0.02,
             ),
             child: Row(
@@ -67,7 +67,7 @@ cardHeader(BuildContext context, data) {
         ),
         Container(
           padding: EdgeInsets.only(
-            right: screenSize.width * 0.07,
+            right: screenSize.width * 0.03,
             top: screenSize.height * 0.02,
           ),
           child: IconButton(

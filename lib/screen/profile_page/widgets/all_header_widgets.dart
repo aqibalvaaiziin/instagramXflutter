@@ -257,7 +257,7 @@ messageButton(BuildContext context) {
   );
 }
 
-headerControl(BuildContext context, data, dataUser) {
+headerControl(BuildContext context, data, isMe) {
   var screenSize = MediaQuery.of(context).size;
   return Container(
     margin: EdgeInsets.only(top: screenSize.height * 0.1),
@@ -277,7 +277,7 @@ headerControl(BuildContext context, data, dataUser) {
           ),
         ),
         statsProfile(context, data),
-        data['user']['username'] != dataUser
+        !isMe
             ? Container(
                 width: screenSize.width,
                 child: Row(

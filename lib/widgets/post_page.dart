@@ -6,6 +6,7 @@ import 'package:flutter_icons/flutter_icons.dart';
 import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:instagramxflutter/screen/post_image/post_image_page.dart';
+import 'package:instagramxflutter/screen/post_video/post_video_page.dart';
 import 'package:instagramxflutter/widgets/route_animation.dart';
 
 class PostPage extends StatefulWidget {
@@ -24,7 +25,7 @@ class _PostPageState extends State<PostPage> with TickerProviderStateMixin {
   @override
   void initState() {
     super.initState();
-    
+
     controller = AnimationController(
       vsync: this,
       duration: Duration(milliseconds: 1000),
@@ -167,6 +168,9 @@ class _PostPageState extends State<PostPage> with TickerProviderStateMixin {
       setState(() {
         selectedFile = File(video.path);
       });
+      Navigator.of(context).push(routeToV(PostVideoPage(
+        dataVideo: selectedFile,
+      )));
     }
   }
 
@@ -182,8 +186,8 @@ class _PostPageState extends State<PostPage> with TickerProviderStateMixin {
                 children: <Widget>[
                   Container(
                     margin: EdgeInsets.all(15),
-                    width: screenSize.width * 0.7,
-                    height: screenSize.height * 0.23,
+                    width: screenSize.width * 0.68,
+                    height: screenSize.height * 0.2,
                     decoration: BoxDecoration(
                       color: Color(0xff404040),
                       borderRadius: BorderRadius.all(Radius.circular(20)),
@@ -194,7 +198,7 @@ class _PostPageState extends State<PostPage> with TickerProviderStateMixin {
                           crossAxisAlignment: CrossAxisAlignment.center,
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: <Widget>[
-                            SizedBox(height: screenSize.height * 0.04),
+                            SizedBox(height: screenSize.height * 0.02),
                             Container(
                               child: Center(
                                 child: Text(
@@ -217,38 +221,42 @@ class _PostPageState extends State<PostPage> with TickerProviderStateMixin {
                                           Radius.circular(
                                               screenSize.width * 0.01)),
                                     ),
-                                    child: FlatButton(
-                                        onPressed: () {
-                                          if (choosed) {
-                                            getImage(ImageSource.camera);
-                                          } else {
-                                            getVideo(ImageSource.camera);
-                                          }
-                                        },
-                                        child: Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.center,
-                                          children: <Widget>[
-                                            Icon(
-                                              Icons.camera_alt,
-                                              size: screenSize.width * 0.07,
-                                              color: Colors.white,
-                                            ),
-                                            SizedBox(
-                                              width: 5,
-                                            ),
-                                            Text(
-                                              "Camera",
-                                              style: TextStyle(
-                                                  fontSize:
-                                                      screenSize.width * 0.035,
-                                                  fontFamily: "FL",
-                                                  fontWeight: FontWeight.w600,
-                                                  color: Colors.white,
-                                                  letterSpacing: 0.9),
-                                            )
-                                          ],
-                                        )),
+                                    child: ClipRRect(
+                                      borderRadius: BorderRadius.circular(
+                                          screenSize.width * 0.15),
+                                      child: FlatButton(
+                                          onPressed: () {
+                                            if (choosed) {
+                                              getImage(ImageSource.camera);
+                                            } else {
+                                              getVideo(ImageSource.camera);
+                                            }
+                                          },
+                                          child: Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
+                                            children: <Widget>[
+                                              Icon(
+                                                Icons.camera_alt,
+                                                size: screenSize.width * 0.06,
+                                                color: Colors.white,
+                                              ),
+                                              SizedBox(
+                                                width: 5,
+                                              ),
+                                              Text(
+                                                "Camera",
+                                                style: TextStyle(
+                                                    fontSize: screenSize.width *
+                                                        0.035,
+                                                    fontFamily: "FL",
+                                                    fontWeight: FontWeight.w600,
+                                                    color: Colors.white,
+                                                    letterSpacing: 0.9),
+                                              )
+                                            ],
+                                          )),
+                                    ),
                                   ),
                                   SizedBox(width: screenSize.width * 0.02),
                                   Container(
@@ -256,38 +264,42 @@ class _PostPageState extends State<PostPage> with TickerProviderStateMixin {
                                       borderRadius:
                                           BorderRadius.all(Radius.circular(7)),
                                     ),
-                                    child: FlatButton(
-                                        onPressed: () async {
-                                          if (choosed) {
-                                            getImage(ImageSource.gallery);
-                                          } else {
-                                            getVideo(ImageSource.gallery);
-                                          }
-                                        },
-                                        child: Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.center,
-                                          children: <Widget>[
-                                            Icon(
-                                              FontAwesome.folder_open,
-                                              size: screenSize.width * 0.07,
-                                              color: Colors.white,
-                                            ),
-                                            SizedBox(
-                                              width: 5,
-                                            ),
-                                            Text(
-                                              "Gallery",
-                                              style: TextStyle(
-                                                  fontSize:
-                                                      screenSize.width * 0.035,
-                                                  fontFamily: "FL",
-                                                  fontWeight: FontWeight.w600,
-                                                  color: Colors.white,
-                                                  letterSpacing: 0.9),
-                                            )
-                                          ],
-                                        )),
+                                    child: ClipRRect(
+                                      borderRadius: BorderRadius.circular(
+                                          screenSize.width * 0.15),
+                                      child: FlatButton(
+                                          onPressed: () async {
+                                            if (choosed) {
+                                              getImage(ImageSource.gallery);
+                                            } else {
+                                              getVideo(ImageSource.gallery);
+                                            }
+                                          },
+                                          child: Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
+                                            children: <Widget>[
+                                              Icon(
+                                                FontAwesome.folder_open,
+                                                size: screenSize.width * 0.06,
+                                                color: Colors.white,
+                                              ),
+                                              SizedBox(
+                                                width: 5,
+                                              ),
+                                              Text(
+                                                "Gallery",
+                                                style: TextStyle(
+                                                    fontSize: screenSize.width *
+                                                        0.035,
+                                                    fontFamily: "FL",
+                                                    fontWeight: FontWeight.w600,
+                                                    color: Colors.white,
+                                                    letterSpacing: 0.9),
+                                              )
+                                            ],
+                                          )),
+                                    ),
                                   ),
                                 ],
                               ),
