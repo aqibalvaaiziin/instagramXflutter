@@ -3,7 +3,7 @@ import 'package:instagramxflutter/helper/preferences/preferences.dart';
 
 class ProviderUser {
   static BaseOptions options = new BaseOptions(
-    baseUrl: "https://serviceinsta.herokuapp.com",
+    baseUrl: "https://serviceinsta2.herokuapp.com",
   );
   static PreferencesData preferencesData = PreferencesData();
   static Dio dio = Dio(options);
@@ -25,9 +25,19 @@ class ProviderUser {
     }
   }
 
+  static Future register(
+    String name,
+    String username,
+    String password,
+  ) async {
+    await dio.post("/user", data: {
+      "name": name,
+      "username": username,
+      "password": password,
+    });
+  }
 
   static Future getUserProfile(username) async {
     return dio.get("/user/$username");
   }
-
 }

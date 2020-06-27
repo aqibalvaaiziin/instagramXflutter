@@ -299,14 +299,12 @@ dataTitle(BuildContext context, bool data, name) {
   var screenSize = MediaQuery.of(context).size;
   return Container(
     width: screenSize.width,
-    padding: EdgeInsets.zero,
-    margin: EdgeInsets.zero,
     child: Row(
       children: <Widget>[
         Container(
           child: IconButton(
             icon: CustomIcon.iconMore(
-                color: Colors.white, size: screenSize.width * 0.055),
+                color: Colors.white, size: screenSize.width * 0.05),
             onPressed: () {},
           ),
         ),

@@ -3,7 +3,7 @@ import 'package:instagramxflutter/helper/preferences/preferences.dart';
 
 class ProviderVideo {
   static BaseOptions options = new BaseOptions(
-    baseUrl: "https://serviceinsta.herokuapp.com",
+    baseUrl: "https://serviceinsta2.herokuapp.com",
   );
   static PreferencesData preferencesData = PreferencesData();
   static Dio dio = Dio(options);

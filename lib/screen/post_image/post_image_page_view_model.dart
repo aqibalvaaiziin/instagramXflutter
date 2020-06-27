@@ -17,14 +17,11 @@ abstract class PostImagePageViewModel extends State<PostImagePage> {
   changeSelected(int i) {
     setState(() {
       selectedIndex = i;
-      print(selectedIndex);
     });
   }
 
   Future<String> get _localPath async {
     final directory = await getApplicationDocumentsDirectory();
-    // For your reference print the AppDoc directory
-    print(directory.path);
     return directory.path;
   }
 
@@ -43,7 +40,6 @@ abstract class PostImagePageViewModel extends State<PostImagePage> {
           decodeBytes = base64Decode(bs64);
           file = Io.File("$path/decode.png");
           file.writeAsBytesSync(decodeBytes);
-          print("dataku :  ${file.path}");
         });
         return pngBytes;
       } catch (e) {

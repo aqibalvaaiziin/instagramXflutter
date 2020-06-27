@@ -4,7 +4,7 @@ import 'package:path_provider/path_provider.dart';
 
 class ProviderImage {
   static BaseOptions options = new BaseOptions(
-    baseUrl: "https://serviceinsta.herokuapp.com",
+    baseUrl: "https://serviceinsta2.herokuapp.com",
   );
   static PreferencesData preferencesData = PreferencesData();
 
@@ -12,8 +12,6 @@ class ProviderImage {
 
   static Future<String> get _localPath async {
     final directory = await getApplicationDocumentsDirectory();
-    // For your reference print the AppDoc directory
-    print(directory.path);
     return directory.path;
   }
 

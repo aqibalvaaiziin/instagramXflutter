@@ -46,52 +46,60 @@ class FeetPageView extends FeetPageViewModel {
                   listCategory(context, dataCategory[i]),
             ),
           ),
-          Expanded(
-            child: StaggeredGridView.countBuilder(
-              padding: EdgeInsets.only(
-                top: screenSize.height * 0.01,
-              ),
-              crossAxisSpacing: 3,
-              crossAxisCount: 3,
-              mainAxisSpacing: 3,
-              itemCount: allFeet.length,
-              staggeredTileBuilder: (i) {
-                var main = 0;
-                var cross = 0;
-                if (i % 3 == 0 && i % 4 == 0) {
-                  cross = 2;
-                  main = 2;
-                } else if (i % 3 == 1 && i % 4 - 2 == 1) {
-                  cross = 2;
-                  main = 2;
-                } else {
-                  cross = 1;
-                  main = 1;
-                }
-                return StaggeredTile.count(cross, main);
-              },
-              itemBuilder: (context, i) {
-                return GestureDetector(
-                  onTap: () {
-                    Navigator.of(context).push(
-                      routeToV(
-                        ScrollFeetPage(
-                          id: allFeet[i]['_id'],
-                          from: "imageFeet",
-                        ),
-                      ),
-                    );
-                  },
-                  child: Container(
-                    child: Image.network(
-                      allFeet[i]['imageLink'],
-                      fit: BoxFit.cover,
+          allFeet.length > 0
+              ? Expanded(
+                  child: StaggeredGridView.countBuilder(
+                    padding: EdgeInsets.only(
+                      top: screenSize.height * 0.01,
                     ),
+                    crossAxisSpacing: 3,
+                    crossAxisCount: 3,
+                    mainAxisSpacing: 3,
+                    itemCount: allFeet.length,
+                    staggeredTileBuilder: (i) {
+                      var main = 0;
+                      var cross = 0;
+                      if (i % 3 == 0 && i % 4 == 0) {
+                        cross = 2;
+                        main = 2;
+                      } else if (i % 3 == 1 && i % 4 - 2 == 1) {
+                        cross = 2;
+                        main = 2;
+                      } else {
+                        cross = 1;
+                        main = 1;
+                      }
+                      return StaggeredTile.count(cross, main);
+                    },
+                    itemBuilder: (context, i) {
+                      return GestureDetector(
+                        onTap: () {
+                          Navigator.of(context).push(
+                            routeToV(
+                              ScrollFeetPage(
+                                id: allFeet[i]['_id'],
+                                from: "imageFeet",
+                              ),
+                            ),
+                          );
+                        },
+                        child: Container(
+                          child: Image.network(
+                            allFeet[i]['imageLink'],
+                            fit: BoxFit.cover,
+                          ),
+                        ),
+                      );
+                    },
                   ),
-                );
-              },
-            ),
-          ),
+                )
+              : Container(
+                  width: screenSize.width,
+                  height: screenSize.height * 0.6,
+                  child: Center(
+                    child: CircularProgressIndicator(),
+                  ),
+                ),
         ],
       ),
     );

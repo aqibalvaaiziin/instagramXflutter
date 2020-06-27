@@ -9,15 +9,11 @@ void main() {
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return DevicePreview(
-      builder: (context) {
-        return MaterialApp(
-          theme: ThemeData.dark(),
-          builder: DevicePreview.appBuilder,
-          debugShowCheckedModeBanner: false,
-          home: SplashScreen(),
-        );
-      },
+    return MaterialApp(
+      theme: ThemeData.dark(),
+      builder: DevicePreview.appBuilder,
+      debugShowCheckedModeBanner: false,
+      home: SplashScreen(),
     );
   }
 }

@@ -7,9 +7,14 @@ class PostVideoPageView extends PostVideoPageViewModel {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: PlayerVideo(
-          video: VideoPlayerController.file(widget.dataVideo),
+      appBar: AppBar(),
+      body: Container(
+        child: Column(
+          children: <Widget>[
+            PlayerVideo(
+              video: VideoPlayerController.file(widget.dataVideo),
+            )
+          ],
         ),
       ),
     );

@@ -2,7 +2,6 @@ class HelperString {
   static String getTimeSinceUpload(String inputTime) {
     var dateUpload = DateTime.parse(inputTime);
     DateTime now = DateTime.now();
-    print(now.toString());
     int minutes = now.difference(dateUpload).inMinutes;
     int hours = now.difference(dateUpload).inHours;
     int days = now.difference(dateUpload).inDays;
@@ -44,13 +43,13 @@ class HelperString {
     String viewString = inputView.toString();
     String value = "";
     if (viewString.length >= 10) {
-      value = "B";
+      value = " B";
       viewString = compressView([11, 12], viewString);
     } else if (viewString.length >= 7) {
-      value = "M";
+      value = " M";
       viewString = compressView([8, 9], viewString);
     } else if (viewString.length >= 4) {
-      value = "K";
+      value = " K";
       viewString = compressView([5, 6], viewString);
     }
     return viewString + value;

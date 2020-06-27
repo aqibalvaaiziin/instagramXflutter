@@ -36,16 +36,13 @@ abstract class ScrollFeetPageViewModel extends State<ScrollFeetPage> {
         if (mounted) {
           setState(() {
             selectedItem = jsonObject.singleWhere((item) {
-              print(item['_id']);
               return item['_id'] == widget.id;
             });
             allImageData = jsonObject
                 .where((item) => item['_id'] != selectedItem['_id'])
                 .toList();
             allImageData.insert(0, selectedItem);
-            print(selectedItem.toString());
           });
-          print(allImageData);
         }
       });
     });

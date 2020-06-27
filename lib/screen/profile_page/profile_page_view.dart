@@ -27,7 +27,11 @@ class ProfilePageView extends ProfilePageViewModel {
         child: NotificationListener<ScrollUpdateNotification>(
           child: dataImageProfile.length == 0
               ? Center(
-                  child: CircularProgressIndicator(),
+                  child: Text(
+                    "kamu belum posting apapun,lagian apa yang kamu posting kamu kan jomblo!!",
+                    style: TextStyle(fontSize: screenSize.width * 0.05),
+                    textAlign: TextAlign.center,
+                  ),
                 )
               : CustomScrollView(
                   controller: scrollController,

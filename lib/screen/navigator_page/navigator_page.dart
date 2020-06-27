@@ -3,7 +3,7 @@ import 'package:instagramxflutter/helper/preferences/preferences.dart';
 import 'package:instagramxflutter/screen/feet_page/feet_page.dart';
 import 'package:instagramxflutter/screen/home_page/home_page.dart';
 import 'package:instagramxflutter/screen/profile_page/profile_page.dart';
-import 'package:instagramxflutter/screen/tv_page/tv_page.dart';
+import 'package:instagramxflutter/screen/video_page/video_page.dart';
 import 'package:instagramxflutter/widgets/bottomBar.dart';
 import 'package:instagramxflutter/widgets/post_page.dart';
 
@@ -35,7 +35,7 @@ class _NavigatorPageState extends State<NavigatorPage> {
             HomePage(),
             FeetPage(),
             PostPage(),
-            TvPage(),
+            VideoPage(),
             ProfilePage(
               username: username,
               isMe: true,

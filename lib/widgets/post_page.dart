@@ -163,14 +163,12 @@ class _PostPageState extends State<PostPage> with TickerProviderStateMixin {
   }
 
   getVideo(ImageSource source) async {
+    PickedFile video = await picker.getVideo(source: source);
+    setState(() {
+      selectedFile = File(video.path);
+    });
     if (selectedFile != null) {
-      PickedFile video = await picker.getVideo(source: source);
-      setState(() {
-        selectedFile = File(video.path);
-      });
-      Navigator.of(context).push(routeToV(PostVideoPage(
-        dataVideo: selectedFile,
-      )));
+      Navigator.of(context).push(routeToV(PostVideoPage(dataVideo : selectedFile)));
     }
   }
 
@@ -226,7 +224,7 @@ class _PostPageState extends State<PostPage> with TickerProviderStateMixin {
                                           screenSize.width * 0.15),
                                       child: FlatButton(
                                           onPressed: () {
-                                            if (choosed) {
+                                            if (choosed == true) {
                                               getImage(ImageSource.camera);
                                             } else {
                                               getVideo(ImageSource.camera);
@@ -269,7 +267,7 @@ class _PostPageState extends State<PostPage> with TickerProviderStateMixin {
                                           screenSize.width * 0.15),
                                       child: FlatButton(
                                           onPressed: () async {
-                                            if (choosed) {
+                                            if (choosed == true) {
                                               getImage(ImageSource.gallery);
                                             } else {
                                               getVideo(ImageSource.gallery);

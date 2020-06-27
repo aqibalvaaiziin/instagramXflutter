@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
+import 'package:instagramxflutter/screen/register_page/register_page.dart';
+import 'package:instagramxflutter/widgets/route_animation.dart';
 
 instagramTitle(BuildContext context) {
   var screenSize = MediaQuery.of(context).size;
@@ -192,27 +194,28 @@ floatingBottom(BuildContext context) {
       ),
     ),
     child: Center(
-      child: RichText(
-        text: TextSpan(
-          children: <TextSpan>[
-            TextSpan(
-              text: "Don't have an account? ",
-              style: TextStyle(
-                fontSize: screenSize.width * 0.035,
-                color: Color(0xffbfbfbf),
-              ),
-            ),
-            TextSpan(
-              text: " Sign up",
-              style: TextStyle(
-                fontSize: screenSize.width * 0.035,
-                fontWeight: FontWeight.w600,
-                color: Colors.white,
-              ),
-            ),
-          ],
+        child: Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: <Widget>[
+        Text(
+          "Don't have an account? ",
+          style: TextStyle(
+            fontSize: screenSize.width * 0.035,
+            color: Color(0xffbfbfbf),
+          ),
         ),
-      ),
-    ),
+        GestureDetector(
+          onTap: () => Navigator.of(context).push(routeTo(RegisterPage())),
+          child: Text(
+            " Sign up",
+            style: TextStyle(
+              fontSize: screenSize.width * 0.035,
+              fontWeight: FontWeight.w600,
+              color: Colors.white,
+            ),
+          ),
+        )
+      ],
+    )),
   );
 }

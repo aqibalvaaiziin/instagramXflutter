@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:instagramxflutter/helper/data/time_and_view_string.dart';
 import 'package:instagramxflutter/helper/icon/icon_data.dart';
 import 'package:instagramxflutter/screen/detail_feet/detail_feet.dart';
 import 'package:instagramxflutter/screen/home_page/widgets/card-component.dart';
@@ -100,7 +101,7 @@ class ScrollFeetPageView extends ScrollFeetPageViewModel {
                         ),
                         SizedBox(width: screenSize.width * 0.015),
                         Text(
-                          data['like'].toString(),
+                          HelperString.getViewCount(data['like']).toString(),
                           style: TextStyle(
                             color: Colors.black,
                             fontSize: screenSize.width * 0.04,

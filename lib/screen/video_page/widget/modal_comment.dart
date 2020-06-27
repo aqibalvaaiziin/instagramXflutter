@@ -198,9 +198,7 @@ commentSection(BuildContext context) {
                 fontWeight: FontWeight.w600,
               ),
             ),
-            onChanged: (value) {
-              print(value);
-            },
+            onChanged: (value) {},
           ),
         ),
         Container(
@@ -209,9 +207,7 @@ commentSection(BuildContext context) {
                 Icons.send,
                 size: screenSize.width * 0.055,
               ),
-              onPressed: () {
-                print("object");
-              }),
+              onPressed: () {}),
         ),
       ],
     ),

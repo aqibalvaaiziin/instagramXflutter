@@ -10,6 +10,7 @@ class PostImagePageView extends PostImagePageViewModel {
     final screenSize = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(
+        title: Text("Edit Image"),
         flexibleSpace: Stack(
           children: <Widget>[
             Positioned(

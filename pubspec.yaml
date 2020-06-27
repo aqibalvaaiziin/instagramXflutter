@@ -43,7 +43,6 @@ dependencies:
   image_cropper: ^1.2.3
   jiffy: ^3.0.1
 
-
 dev_dependencies:
   flutter_test:
     sdk: flutter

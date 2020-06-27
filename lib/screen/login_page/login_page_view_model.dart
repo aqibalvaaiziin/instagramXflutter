@@ -38,9 +38,9 @@ abstract class LoginPageViewModel extends State<LoginPage> {
       width: screenSize.width * 0.85,
       height: screenSize.height * 0.06,
       decoration: BoxDecoration(
-        color: Colors.blue[700],
-        borderRadius: BorderRadius.all(Radius.circular(screenSize.width * 0.01))
-      ),
+          color: Colors.blue[700],
+          borderRadius:
+              BorderRadius.all(Radius.circular(screenSize.width * 0.01))),
       child: MaterialButton(
         padding: EdgeInsets.zero,
         elevation: 5,
@@ -50,13 +50,18 @@ abstract class LoginPageViewModel extends State<LoginPage> {
           if (username.text.isNotEmpty && password.text.isNotEmpty) {
             loginBtnClicked();
             ProviderUser.login(username.text, password.text).then((value) {
-              print(value.statusCode);
               var jsonObject = jsonDecode(jsonEncode(value.data));
               if (value.statusCode == 200) {
                 preferencesData.setToken(jsonObject['token']);
                 preferencesData.setUsername(username.text);
-                Navigator.of(context)
-                    .pushReplacement(routeToV(NavigatorPage()));
+                Future.delayed(Duration(seconds: 1), () {
+                  preferencesData.getToken().then((value) {
+                    if (value != null) {
+                      Navigator.of(context)
+                          .pushReplacement(routeToV(NavigatorPage()));
+                    }
+                  });
+                });
               } else {
                 toastMessage("Input doesn't match", Colors.red[600]);
               }
