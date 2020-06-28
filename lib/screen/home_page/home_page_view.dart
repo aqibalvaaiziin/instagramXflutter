@@ -6,6 +6,7 @@ import 'package:instagramxflutter/screen/detail_feet/detail_feet.dart';
 import 'package:instagramxflutter/screen/home_page/widgets/card-component.dart';
 import 'package:instagramxflutter/screen/home_page/widgets/sotry.dart';
 import 'package:instagramxflutter/widgets/helper_widget.dart';
+import 'package:instagramxflutter/widgets/shimmer.dart';
 import '../../widgets/route_animation.dart';
 import './home_page_view_model.dart';
 
@@ -196,11 +197,35 @@ class HomePageView extends HomePageViewModel {
                 ],
               )
             : Container(
-                child: Center(
-                  child: Text(
-                    "Data masih kosong karena kamu gapunya temen,dan kamu jomblo!!",
-                    style: TextStyle(fontSize: screenSize.width * 0.05),
-                    textAlign: TextAlign.center,
+                child: Container(
+                  child: Column(
+                    children: <Widget>[
+                      Expanded(
+                        flex: 1,
+                        child: ListView(
+                          scrollDirection: Axis.horizontal,
+                          children: <Widget>[
+                            shimmerStory(context),
+                            shimmerStory(context),
+                            shimmerStory(context),
+                            shimmerStory(context),
+                            shimmerStory(context),
+                            shimmerStory(context),
+                            shimmerStory(context),
+                          ],
+                        ),
+                      ),
+                      SizedBox(height: screenSize.height * 0.02),
+                      Expanded(
+                        flex: 8,
+                        child: ListView(
+                          children: <Widget>[
+                            shimmerHome(context),
+                            shimmerHome(context),
+                          ],
+                        ),
+                      ),
+                    ],
                   ),
                 ),
               ),

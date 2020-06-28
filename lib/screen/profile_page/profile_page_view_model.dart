@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:foldable_sidebar/foldable_sidebar.dart';
 import 'package:instagramxflutter/helper/preferences/preferences.dart';
 import 'package:instagramxflutter/providers/provider_image.dart';
 import './profile_page.dart';
@@ -11,6 +12,7 @@ abstract class ProfilePageViewModel extends State<ProfilePage> {
   List dataImageProfile = [];
   PreferencesData preferencesData = PreferencesData();
   String username;
+  FSBStatus drawerStatus;
 
   void getProfile() {
     preferencesData.getUsername().then((username) {

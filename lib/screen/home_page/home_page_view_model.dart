@@ -15,13 +15,15 @@ abstract class HomePageViewModel extends State<HomePage> {
   getImageContentByFollowing() {
     ProviderImage.getDataImageByFollow().then((value) {
       var jsonObject = jsonDecode(jsonEncode(value.data));
-      setState(() {
-        for (var i = 0; i < jsonObject.length; i++) {
-          setState(() {
-            dataImage.add(jsonObject[i]);
-          });
-        }
-      });
+      if (mounted) {
+        setState(() {
+          for (var i = 0; i < jsonObject.length; i++) {
+            setState(() {
+              dataImage.add(jsonObject[i]);
+            });
+          }
+        });
+      }
     });
   }
 

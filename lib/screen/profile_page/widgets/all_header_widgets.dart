@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:instagramxflutter/helper/icon/icon_data.dart';
 
 imageProfile(BuildContext context, data) {
   var screenSize = MediaQuery.of(context).size;
@@ -70,10 +69,12 @@ descProfile(BuildContext context, data) {
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.end,
             children: <Widget>[
-              Icon(
-                Icons.lightbulb_outline,
-                size: screenSize.width * 0.04,
-              ),
+              data['user']['location'] == ""
+                  ? SizedBox()
+                  : Icon(
+                      Icons.lightbulb_outline,
+                      size: screenSize.width * 0.04,
+                    ),
               SizedBox(width: screenSize.width * 0.01),
               Text(
                 data['user']['location'],
@@ -290,37 +291,6 @@ headerControl(BuildContext context, data, isMe) {
                 ),
               )
             : Container(),
-      ],
-    ),
-  );
-}
-
-dataTitle(BuildContext context, bool data, name) {
-  var screenSize = MediaQuery.of(context).size;
-  return Container(
-    width: screenSize.width,
-    child: Row(
-      children: <Widget>[
-        Container(
-          child: IconButton(
-            icon: CustomIcon.iconMore(
-                color: Colors.white, size: screenSize.width * 0.05),
-            onPressed: () {},
-          ),
-        ),
-        AnimatedOpacity(
-          opacity: data ? 1.0 : 0.0,
-          duration: Duration(milliseconds: 300),
-          child: Container(
-            child: Text(
-              data ? name['user']['name'] : "            ",
-              style: TextStyle(
-                fontSize: screenSize.width * 0.06,
-                fontWeight: FontWeight.w600,
-              ),
-            ),
-          ),
-        ),
       ],
     ),
   );

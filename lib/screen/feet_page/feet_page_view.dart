@@ -3,6 +3,7 @@ import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:instagramxflutter/screen/feet_page/widgets/item_category.dart';
 import 'package:instagramxflutter/screen/scroll_feet_page/scroll_feet_page.dart';
 import 'package:instagramxflutter/widgets/route_animation.dart';
+import 'package:instagramxflutter/widgets/shimmer.dart';
 import './feet_page_view_model.dart';
 
 class FeetPageView extends FeetPageViewModel {
@@ -93,12 +94,12 @@ class FeetPageView extends FeetPageViewModel {
                     },
                   ),
                 )
-              : Container(
-                  width: screenSize.width,
-                  height: screenSize.height * 0.6,
-                  child: Center(
-                    child: CircularProgressIndicator(),
-                  ),
+              : Expanded(
+                  child: ListView(
+                    children: <Widget>[
+                      shimmerFeed(context),
+                    ],
+                  )
                 ),
         ],
       ),

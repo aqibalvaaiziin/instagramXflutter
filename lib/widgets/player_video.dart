@@ -28,7 +28,6 @@ class _PlayerVideoState extends State<PlayerVideo> {
   void dispose() {
     super.dispose();
     if (mounted) {
-      flickManager.flickControlManager.pause();
       flickManager.dispose();
     }
   }
