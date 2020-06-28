@@ -164,11 +164,14 @@ class _PostPageState extends State<PostPage> with TickerProviderStateMixin {
 
   getVideo(ImageSource source) async {
     PickedFile video = await picker.getVideo(source: source);
-    setState(() {
-      selectedFile = File(video.path);
-    });
+    if (video != null) {
+      setState(() {
+        selectedFile = File(video.path);
+      });
+    }
     if (selectedFile != null) {
-      Navigator.of(context).push(routeToV(PostVideoPage(dataVideo : selectedFile)));
+      Navigator.of(context)
+          .push(routeToV(PostVideoPage(dataVideo: selectedFile)));
     }
   }
 

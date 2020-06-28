@@ -25,10 +25,14 @@ abstract class HomePageViewModel extends State<HomePage> {
     });
   }
 
- 
   @override
   void initState() {
     super.initState();
     getImageContentByFollowing();
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
   }
 }

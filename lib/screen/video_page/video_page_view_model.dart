@@ -5,6 +5,10 @@ import './video_page.dart';
 abstract class VideoPageViewModel extends State<VideoPage> {
   List dataVideo = List();
   PageController controller = PageController(initialPage: 0);
+  TextEditingController inputComment = TextEditingController();
+  bool isfav = false;
+  List dataComment = List();
+  String dataId;
 
   getAllVideo() {
     ProviderVideo.getAllVideo().then((res) {
@@ -21,5 +25,10 @@ abstract class VideoPageViewModel extends State<VideoPage> {
   void initState() {
     super.initState();
     getAllVideo();
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
   }
 }

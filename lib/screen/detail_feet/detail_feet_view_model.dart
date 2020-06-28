@@ -1,7 +1,9 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:instagramxflutter/helper/preferences/preferences.dart';
 import 'package:instagramxflutter/providers/provider_image_comment.dart';
+import 'package:instagramxflutter/providers/provider_user.dart';
 import 'package:instagramxflutter/screen/detail_feet/widgets/feet_header.dart';
 import '../../helper/icon/icon_data.dart';
 import './detail_feet.dart';
@@ -11,19 +13,8 @@ abstract class DetailFeetViewModel extends State<DetailFeet> {
   final GlobalKey<AnimatedListState> listKey = GlobalKey();
   bool isfav = false;
   bool isbooked = false;
+  List dataUser = List();
   List dataComment = [];
-
-  getAllComments() {
-    ProviderImageComment.getAllComment(widget.id).then((value) {
-      dataComment.clear();
-      var jsonObject = jsonDecode(jsonEncode(value.data));
-      for (var i = 0; i < jsonObject.length; i++) {
-        setState(() {
-          dataComment.add(jsonObject[i]);
-        });
-      }
-    });
-  }
 
   feetHeader(
     BuildContext context,
@@ -175,6 +166,30 @@ abstract class DetailFeetViewModel extends State<DetailFeet> {
     );
   }
 
+  getUser() {
+    PreferencesData preferencesData = PreferencesData();
+    preferencesData.getUsername().then((username) {
+      ProviderUser.getUserProfile(username).then((res) {
+        final jsonObject = res.data;
+        setState(() {
+          dataUser.add(jsonObject);
+        });
+      });
+    });
+  }
+
+  getAllComments() {
+    ProviderImageComment.getAllComment(widget.id).then((value) {
+      dataComment.clear();
+      var jsonObject = jsonDecode(jsonEncode(value.data));
+      for (var i = 0; i < jsonObject.length; i++) {
+        setState(() {
+          dataComment.add(jsonObject[i]);
+        });
+      }
+    });
+  }
+
   void addComment() {
     ProviderImageComment.addComment(widget.id, inputComment.text).then((_) {
       getAllComments();
@@ -188,6 +203,7 @@ abstract class DetailFeetViewModel extends State<DetailFeet> {
   void initState() {
     super.initState();
     getAllComments();
+    getUser();
   }
 
   @override

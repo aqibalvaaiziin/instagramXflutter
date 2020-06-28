@@ -1,7 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:instagramxflutter/providers/provider_image.dart';
-import 'package:instagramxflutter/screen/navigator_page/navigator_page.dart';
-import 'package:instagramxflutter/widgets/route_animation.dart';
 import './control_post_page_view_model.dart';
 
 class ControlPostPageView extends ControlPostPageViewModel {
@@ -25,22 +22,15 @@ class ControlPostPageView extends ControlPostPageViewModel {
                   child: FlatButton(
                       onPressed: () async {
                         setLoading();
-                        try {
-                          await convertImage();
-                          ProviderImage.postImage(
-                            file.path,
-                            captionController.text,
-                          ).then((_) {
-                            Navigator.of(context)
-                                .pushReplacement(routeTo(NavigatorPage()));
-                            if (mounted) {
-                              setState(() {
-                                isLoading = false;
-                              });
-                            }
-                          }).catchError((err) => print(err.toString()));
-                        } catch (e) {
-                          print(e.toString());
+                        if (widget.isImage) {
+                          try {
+                            await convertImage();
+                            pushImage();
+                          } catch (e) {
+                            print(e.toString());
+                          }
+                        } else {
+                          pushVideo();
                         }
                       },
                       child: Text(
@@ -69,11 +59,23 @@ class ControlPostPageView extends ControlPostPageViewModel {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: <Widget>[
-                      Container(
-                        width: screenSize.width * 0.2,
-                        height: screenSize.width * 0.2,
-                        child: Image.memory(widget.dataPost),
-                      ),
+                      widget.isImage
+                          ? Container(
+                              width: screenSize.width * 0.2,
+                              height: screenSize.width * 0.2,
+                              child: Image.memory(widget.dataPost),
+                            )
+                          : Container(
+                              width: screenSize.width * 0.2,
+                              height: screenSize.width * 0.2,
+                              color: Colors.black,
+                              child: Center(
+                                child: Icon(
+                                  Icons.videocam,
+                                  size: screenSize.width * 0.055,
+                                ),
+                              ),
+                            ),
                       Container(
                         width: screenSize.width * 0.7,
                         child: TextField(

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:instagramxflutter/helper/data/dataJson.dart';
 import 'package:instagramxflutter/helper/data/time_and_view_string.dart';
 import 'package:instagramxflutter/helper/icon/icon_data.dart';
 import 'package:instagramxflutter/screen/detail_feet/widgets/feet_header.dart';
@@ -10,7 +9,9 @@ class DetailFeetView extends DetailFeetViewModel {
   Widget build(BuildContext context) {
     var screenSize = MediaQuery.of(context).size;
     return Scaffold(
-      floatingActionButton: commentSection(context, widget.id, inputComment),
+      floatingActionButton: dataUser.length > 0
+          ? commentSection(context, inputComment, dataUser[0]['image'])
+          : SizedBox(),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       body: CustomScrollView(
         slivers: <Widget>[
@@ -34,11 +35,14 @@ class DetailFeetView extends DetailFeetViewModel {
           ),
           SliverList(
             delegate: SliverChildListDelegate(
-              dataComment.length > 0
+              dataComment.length > 0 && dataUser.length > 0
                   ? [
                       Container(
                         width: screenSize.width,
-                        height: screenSize.height * 0.9,
+                        height: screenSize.height,
+                        margin: EdgeInsets.only(
+                          bottom: screenSize.height * 0.06,
+                        ),
                         child: ListView.builder(
                             padding: EdgeInsets.zero,
                             itemCount: dataComment.length,
@@ -144,7 +148,7 @@ class DetailFeetView extends DetailFeetViewModel {
     );
   }
 
-  commentSection(BuildContext context, String dataId, comment) {
+  commentSection(BuildContext context, comment, image) {
     var screenSize = MediaQuery.of(context).size;
     return Stack(
       children: <Widget>[
@@ -178,10 +182,7 @@ class DetailFeetView extends DetailFeetViewModel {
                           decoration: BoxDecoration(
                             shape: BoxShape.circle,
                             image: DecorationImage(
-                                image: AssetImage(
-                                  DataFeet.dataFeet[1]['avatar'],
-                                ),
-                                fit: BoxFit.cover),
+                                image: NetworkImage(image), fit: BoxFit.cover),
                           ),
                         ),
                       ),
@@ -194,9 +195,6 @@ class DetailFeetView extends DetailFeetViewModel {
                     controller: comment,
                     maxLines: 5,
                     minLines: 1,
-                    onSubmitted: (value) {
-                      addComment();
-                    },
                     decoration: InputDecoration(
                       border: InputBorder.none,
                       hintText: "Add comment",

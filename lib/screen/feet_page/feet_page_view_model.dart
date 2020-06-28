@@ -28,6 +28,11 @@ abstract class FeetPageViewModel extends State<FeetPage> {
   }
 
   @override
+  void dispose() {
+    super.dispose();
+  }
+
+  @override
   void initState() {
     super.initState();
     getAllFeet();
