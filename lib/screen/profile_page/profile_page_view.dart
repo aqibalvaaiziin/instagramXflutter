@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_icons/flutter_icons.dart';
+import 'package:flutter_redux/flutter_redux.dart';
 import 'package:foldable_sidebar/foldable_sidebar.dart';
 import 'package:instagramxflutter/helper/icon/icon_data.dart';
+import 'package:instagramxflutter/redux/model/app_state_model.dart';
+import 'package:instagramxflutter/redux/model/main_state_model.dart';
 import 'package:instagramxflutter/screen/profile_page/widgets/all_header_widgets.dart';
 import 'package:instagramxflutter/screen/profile_page/widgets/grid_data.dart';
 import 'package:instagramxflutter/screen/scroll_feet_page/scroll_feet_page.dart';
@@ -37,83 +40,90 @@ class ProfilePageView extends ProfilePageViewModel {
             });
           }),
           screenContents: NotificationListener<ScrollUpdateNotification>(
-            child: dataImageProfile.length == 0
-                ? ListView(
-                    children: <Widget>[shimmerProfile(context)],
-                  )
-                : CustomScrollView(
-                    controller: scrollController,
-                    slivers: <Widget>[
-                      SliverAppBar(
-                        automaticallyImplyLeading: widget.isMe ? false : true,
-                        title: widget.isMe && dataImageProfile.length > 0
-                            ? dataTitle(
-                                context,
-                                dataOffset > screenSize.height * 0.2,
-                                dataImageProfile[0],
-                              )
-                            : SizedBox(),
-                        pinned: true,
-                        expandedHeight: !widget.isMe
-                            ? screenSize.height * 0.43
-                            : screenSize.height * 0.378,
-                        flexibleSpace: FlexibleSpaceBar(
-                            background: dataImageProfile.length > 0
-                                ? headerControl(
-                                    context, dataImageProfile[0], widget.isMe)
-                                : SizedBox()),
-                      ),
-                      dataImageProfile.length > 0
-                          ? SliverGrid.count(
-                              mainAxisSpacing: 3,
-                              crossAxisCount: 3,
-                              children: dataImageProfile
-                                  .map(
-                                    (item) => GestureDetector(
-                                      onTap: () {
-                                        Navigator.of(context).push(
-                                          routeTo(
-                                            ScrollFeetPage(
-                                                id: item['_id'],
-                                                from: "profile"),
-                                          ),
-                                        );
-                                      },
-                                      child: dataFeet(context, item),
-                                    ),
+            child: StoreConnector<AppState, MainState>(
+              converter: (store) => store.state.mainState,
+              builder: (context, state) {
+                return state.imageProfile.length == 0
+                    ? ListView(
+                        children: <Widget>[shimmerProfile(context)],
+                      )
+                    : CustomScrollView(
+                        controller: scrollController,
+                        slivers: <Widget>[
+                          SliverAppBar(
+                            automaticallyImplyLeading:
+                                widget.isMe ? false : true,
+                            title: widget.isMe && state.imageProfile.length > 0
+                                ? dataTitle(
+                                    context,
+                                    dataOffset > screenSize.height * 0.2,
+                                    state.imageProfile[0],
                                   )
-                                  .toList(),
-                            )
-                          : SliverList(
-                              delegate: SliverChildListDelegate([
-                                Container(
-                                  width: screenSize.width,
-                                  height: screenSize.height * 0.3,
-                                  child: Column(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.center,
-                                    children: <Widget>[
-                                      Icon(
-                                        FontAwesome.camera,
-                                        size: screenSize.width * 0.2,
-                                        color: Colors.white,
-                                      ),
-                                      Container(
-                                        child: Text(
-                                          "No post available",
-                                          style: TextStyle(
-                                              fontSize:
-                                                  screenSize.width * 0.05),
+                                : SizedBox(),
+                            pinned: true,
+                            expandedHeight: !widget.isMe
+                                ? screenSize.height * 0.43
+                                : screenSize.height * 0.378,
+                            flexibleSpace: FlexibleSpaceBar(
+                                background: state.imageProfile.length > 0
+                                    ? headerControl(context,
+                                        state.imageProfile[0], widget.isMe)
+                                    : SizedBox()),
+                          ),
+                          state.imageProfile.length > 0
+                              ? SliverGrid.count(
+                                  mainAxisSpacing: 3,
+                                  crossAxisCount: 3,
+                                  children: state.imageProfile
+                                      .map(
+                                        (item) => GestureDetector(
+                                          onTap: () {
+                                            Navigator.of(context).push(
+                                              routeTo(
+                                                ScrollFeetPage(
+                                                    id: item['_id'],
+                                                    from: "profile"),
+                                              ),
+                                            );
+                                          },
+                                          child: dataFeet(context, item),
                                         ),
-                                      ),
-                                    ],
-                                  ),
+                                      )
+                                      .toList(),
                                 )
-                              ]),
-                            ),
-                    ],
-                  ),
+                              : SliverList(
+                                  delegate: SliverChildListDelegate([
+                                    Container(
+                                      width: screenSize.width,
+                                      height: screenSize.height * 0.3,
+                                      child: Column(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.center,
+                                        children: <Widget>[
+                                          Icon(
+                                            FontAwesome.camera,
+                                            size: screenSize.width * 0.2,
+                                            color: Colors.white,
+                                          ),
+                                          Container(
+                                            child: Text(
+                                              "No post available",
+                                              style: TextStyle(
+                                                  fontSize:
+                                                      screenSize.width * 0.05),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    )
+                                  ]),
+                                ),
+                        ],
+                      );
+              },
+            ),
             onNotification: (notification) {
               setState(() {
                 dataOffset = notification.metrics.pixels;

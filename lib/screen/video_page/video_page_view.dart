@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
+import 'package:flutter_redux/flutter_redux.dart';
+import 'package:instagramxflutter/redux/model/app_state_model.dart';
+import 'package:instagramxflutter/redux/model/main_state_model.dart';
 import 'package:instagramxflutter/screen/video_page/widget/comment_page.dart';
 import 'package:instagramxflutter/screen/video_page/widget/video_app.dart';
 import 'package:instagramxflutter/widgets/route_animation.dart';
@@ -10,40 +13,46 @@ class VideoPageView extends VideoPageViewModel {
   Widget build(BuildContext context) {
     final screenSize = MediaQuery.of(context).size;
     return Scaffold(
-      body: dataVideo.length > 0
-          ? PageView.builder(
-              controller: controller,
-              scrollDirection: Axis.vertical,
-              itemCount: dataVideo.length,
-              itemBuilder: (context, i) {
-                return Stack(
-                  children: <Widget>[
-                    VideoApp(
-                      dataVideo: dataVideo[i]['videoLink'],
-                    ),
-                    Positioned(
-                        bottom: screenSize.height * 0.05,
-                        left: screenSize.width * 0.05,
-                        child: dataText(context, dataVideo[i]['user']['name'],
-                            dataVideo[i]['caption'])),
-                    Positioned(
-                      bottom: screenSize.height * 0.1,
-                      right: screenSize.width * 0.05,
-                      child: buttonControl(
-                        context,
-                        dataVideo[i]['user']['image'],
-                        dataVideo[i]['like'],
-                        dataVideo[i]['comment'],
-                        dataVideo[i]['_id'],
-                      ),
-                    ),
-                  ],
-                );
-              },
-            )
-          : Center(
-              child: CircularProgressIndicator(),
-            ),
+      body: StoreConnector<AppState, MainState>(
+          converter: (store) => store.state.mainState,
+          builder: (context, state) {
+            return state.video.length > 0
+                ? PageView.builder(
+                    controller: controller,
+                    scrollDirection: Axis.vertical,
+                    itemCount: state.video.length,
+                    itemBuilder: (context, i) {
+                      return Stack(
+                        children: <Widget>[
+                          VideoApp(
+                            dataVideo: state.video[i]['videoLink'],
+                          ),
+                          Positioned(
+                              bottom: screenSize.height * 0.05,
+                              left: screenSize.width * 0.05,
+                              child: dataText(
+                                  context,
+                                  state.video[i]['user']['name'],
+                                  state.video[i]['caption'])),
+                          Positioned(
+                            bottom: screenSize.height * 0.1,
+                            right: screenSize.width * 0.05,
+                            child: buttonControl(
+                              context,
+                              state.video[i]['user']['image'],
+                              state.video[i]['like'],
+                              state.video[i]['comment'],
+                              state.video[i]['_id'],
+                            ),
+                          ),
+                        ],
+                      );
+                    },
+                  )
+                : Center(
+                    child: CircularProgressIndicator(),
+                  );
+          }),
     );
   }
 

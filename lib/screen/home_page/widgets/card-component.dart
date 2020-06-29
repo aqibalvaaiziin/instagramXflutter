@@ -3,6 +3,7 @@ import 'package:instagramxflutter/helper/data/time_and_view_string.dart';
 import 'package:instagramxflutter/helper/icon/icon_data.dart';
 import 'package:instagramxflutter/screen/profile_page/profile_page.dart';
 import 'package:instagramxflutter/widgets/route_animation.dart';
+import 'package:social_share/social_share.dart';
 
 cardHeader(BuildContext context, data) {
   var screenSize = MediaQuery.of(context).size;
@@ -75,7 +76,12 @@ cardHeader(BuildContext context, data) {
               size: screenSize.width * 0.055,
               color: Colors.black,
             ),
-            onPressed: () {},
+            onPressed: () {
+              SocialShare.shareWhatsapp("${data['imageLink']}")
+                  .then((data) {
+                print(data);
+              });
+            },
           ),
         ),
       ],

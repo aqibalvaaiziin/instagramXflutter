@@ -1,7 +1,9 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
+import 'package:flutter_redux/flutter_redux.dart';
 import 'package:instagramxflutter/providers/provider_image.dart';
+import 'package:instagramxflutter/redux/action/main_state_action.dart';
+import 'package:instagramxflutter/redux/model/app_state_model.dart';
+import 'package:redux/redux.dart';
 import './home_page.dart';
 import 'package:collection/collection.dart';
 
@@ -10,27 +12,24 @@ abstract class HomePageViewModel extends State<HomePage> {
   bool isbooked = false;
   Function equals = const ListEquality().equals;
   bool contains = false;
-  List dataImage = [];
+  Store<AppState> store;
 
-  getImageContentByFollowing() {
+  Future initImageByFollowing() async {
     ProviderImage.getDataImageByFollow().then((value) {
-      var jsonObject = jsonDecode(jsonEncode(value.data));
-      if (mounted) {
-        setState(() {
-          for (var i = 0; i < jsonObject.length; i++) {
-            setState(() {
-              dataImage.add(jsonObject[i]);
-            });
-          }
-        });
-      }
-    });
+      List jsonObject = value.data;
+      store.dispatch(
+        SetImageByFollowing(imageByFollowing: List.from(jsonObject)),
+      );
+    }).catchError((err) => print("ImageByFollowing : ${err.toString()}"));
   }
 
   @override
   void initState() {
     super.initState();
-    getImageContentByFollowing();
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
+      store = StoreProvider.of<AppState>(context);
+      await initImageByFollowing();
+    });
   }
 
   @override
@@ -38,3 +37,4 @@ abstract class HomePageViewModel extends State<HomePage> {
     super.dispose();
   }
 }
+

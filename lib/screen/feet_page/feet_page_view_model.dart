@@ -1,10 +1,14 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
+import 'package:flutter_redux/flutter_redux.dart';
 import 'package:instagramxflutter/providers/provider_image.dart';
+import 'package:instagramxflutter/redux/action/main_state_action.dart';
+import 'package:instagramxflutter/redux/model/app_state_model.dart';
+import 'package:redux/redux.dart';
 import './feet_page.dart';
 
 abstract class FeetPageViewModel extends State<FeetPage> {
+  Store<AppState> store;
+
   List dataCategory = [
     {"text": "Shop"},
     {"text": "Decor"},
@@ -14,17 +18,12 @@ abstract class FeetPageViewModel extends State<FeetPage> {
     {"text": "Art"},
     {"text": "Style"},
   ];
-  List allFeet = [];
 
-  getAllFeet() {
+  Future initAllImage() async {
     ProviderImage.getAllImage().then((value) {
-      var jsonObject = jsonDecode(jsonEncode(value.data));
-      for (var item in jsonObject) {
-        setState(() {
-          allFeet.add(item);
-        });
-      }
-    });
+      List jsonObject = value.data;
+      store.dispatch(SetAllImage(allImage: List.from(jsonObject)));
+    }).catchError((err) => print("AllImage : ${err.toString()}"));
   }
 
   @override
@@ -35,6 +34,9 @@ abstract class FeetPageViewModel extends State<FeetPage> {
   @override
   void initState() {
     super.initState();
-    getAllFeet();
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
+      store = StoreProvider.of<AppState>(context);
+      await initAllImage();
+    });
   }
 }

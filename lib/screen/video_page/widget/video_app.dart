@@ -30,30 +30,26 @@ class _VideoAppState extends State<VideoApp> {
   @override
   Widget build(BuildContext context) {
     final screenSize = MediaQuery.of(context).size;
-    final deviceRatio = screenSize.width / screenSize.height;
     return SafeArea(
       right: false,
       left: false,
       bottom: false,
-      child: Scaffold(
-        body: _controller.value.initialized
-            ? GestureDetector(
-                onTap: () {
-                  setState(() {
-                    _controller.value.isPlaying
-                        ? _controller.pause()
-                        : _controller.play();
-                  });
-                },
-                child: Stack(
+      child: GestureDetector(
+        onTap: () {
+          setState(() {
+            _controller.value.isPlaying
+                ? _controller.pause()
+                : _controller.play();
+          });
+        },
+        child: Scaffold(
+          body: _controller.value.initialized
+              ? Stack(
                   children: <Widget>[
                     Center(
-                      child: Transform.scale(
-                        scale: _controller.value.aspectRatio / deviceRatio,
-                        child: AspectRatio(
-                          aspectRatio: _controller.value.aspectRatio,
-                          child: VideoPlayer(_controller),
-                        ),
+                      child: AspectRatio(
+                        aspectRatio: _controller.value.aspectRatio,
+                        child: VideoPlayer(_controller),
                       ),
                     ),
                     _controller.value.isPlaying
@@ -76,9 +72,9 @@ class _VideoAppState extends State<VideoApp> {
                             ),
                           ),
                   ],
-                ),
-              )
-            : Container(),
+                )
+              : Container(),
+        ),
       ),
     );
   }
