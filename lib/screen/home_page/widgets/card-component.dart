@@ -51,7 +51,7 @@ cardHeader(BuildContext context, data) {
                           color: Colors.black,
                           fontWeight: FontWeight.w700,
                         ),
-                      ),
+                      ), 
                       Text(
                         "${HelperString.getTimeSinceUpload(data['createdAt'])} ago",
                         style: TextStyle(
