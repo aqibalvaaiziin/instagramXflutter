@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:instagramxflutter/helper/data/dataShare.dart';
 import 'package:instagramxflutter/helper/data/time_and_view_string.dart';
 import 'package:instagramxflutter/helper/icon/icon_data.dart';
 import 'package:instagramxflutter/screen/profile_page/profile_page.dart';
@@ -51,7 +52,7 @@ cardHeader(BuildContext context, data) {
                           color: Colors.black,
                           fontWeight: FontWeight.w700,
                         ),
-                      ), 
+                      ),
                       Text(
                         "${HelperString.getTimeSinceUpload(data['createdAt'])} ago",
                         style: TextStyle(
@@ -77,10 +78,8 @@ cardHeader(BuildContext context, data) {
               color: Colors.black,
             ),
             onPressed: () {
-              SocialShare.shareWhatsapp("${data['imageLink']}")
-                  .then((data) {
-                print(data);
-              });
+              shareModal(context, data['user']['image'], data['user']['name'],
+                  data['imageLink']);
             },
           ),
         ),
@@ -106,4 +105,208 @@ imageCard(BuildContext context, data) {
       ),
     ),
   );
+}
+
+Future shareModal(BuildContext context, imageUser, username, dataShare) async {
+  final screenSize = MediaQuery.of(context).size;
+  showModalBottomSheet(
+    context: context,
+    builder: (context) => Container(
+      width: screenSize.width,
+      height: screenSize.height * 0.4,
+      child: Column(
+        children: <Widget>[
+          // send to
+          Expanded(
+            flex: 3,
+            child: Container(
+              padding:
+                  EdgeInsets.symmetric(horizontal: screenSize.width * 0.02),
+              color: Color(0xff222222),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: <Widget>[
+                  Text(
+                    "Send to",
+                    style: TextStyle(
+                        fontSize: screenSize.width * 0.035,
+                        fontWeight: FontWeight.w600),
+                  ),
+                  Container(
+                    margin: EdgeInsets.only(top: screenSize.height * 0.01),
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.end,
+                      children: <Widget>[
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: <Widget>[
+                            Container(
+                              width: screenSize.width * 0.1,
+                              height: screenSize.width * 0.1,
+                              decoration: BoxDecoration(
+                                shape: BoxShape.circle,
+                                image: DecorationImage(
+                                  image: NetworkImage(imageUser),
+                                  fit: BoxFit.cover,
+                                ),
+                              ),
+                            ),
+                            SizedBox(height: screenSize.height * 0.01),
+                            Text(
+                              username,
+                              style:
+                                  TextStyle(fontSize: screenSize.width * 0.03),
+                            ),
+                          ],
+                        ),
+                        SizedBox(width: screenSize.width * 0.035),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: <Widget>[
+                            Container(
+                              width: screenSize.width * 0.1,
+                              height: screenSize.width * 0.1,
+                              decoration: BoxDecoration(
+                                color: Colors.grey,
+                                shape: BoxShape.circle,
+                              ),
+                              child: Icon(
+                                Icons.search,
+                                size: screenSize.width * 0.06,
+                              ),
+                            ),
+                            SizedBox(height: screenSize.height * 0.015),
+                            Text(
+                              'More',
+                              style:
+                                  TextStyle(fontSize: screenSize.width * 0.03),
+                              textAlign: TextAlign.center,
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+          //share to
+          Expanded(
+            flex: 3,
+            child: Container(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  SizedBox(height: screenSize.height * 0.015),
+                  Text(
+                    "Share to",
+                    style: TextStyle(
+                      fontSize: screenSize.width * 0.035,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                  SizedBox(height: screenSize.height * 0.018),
+                  Expanded(
+                    child: ListView.builder(
+                      scrollDirection: Axis.horizontal,
+                      itemCount: DataShare.dataShare.length,
+                      itemBuilder: (context, i) => GestureDetector(
+                        onTap: () {
+                          print(DataShare.dataShare[i]['name']);
+                          if (i == 0 || i == 1) {
+                            onWhatsAppPressed(
+                                "$dataShare");
+                          }
+                        },
+                        child: Center(
+                          child: Container(
+                            margin: EdgeInsets.symmetric(
+                              horizontal: screenSize.width * 0.02,
+                            ),
+                            child: Column(
+                              children: <Widget>[
+                                Container(
+                                  width: screenSize.width * 0.09,
+                                  height: screenSize.width * 0.09,
+                                  decoration: BoxDecoration(
+                                      shape: BoxShape.circle,
+                                      image: DecorationImage(
+                                        image: AssetImage(
+                                          DataShare.dataShare[i]['logo'],
+                                        ),
+                                        fit: BoxFit.cover,
+                                      )),
+                                ),
+                                SizedBox(
+                                  height: screenSize.height * 0.015,
+                                ),
+                                Container(
+                                  width: screenSize.width * 0.15,
+                                  child: Text(
+                                    DataShare.dataShare[i]['name'],
+                                    style: TextStyle(
+                                      fontSize: screenSize.width * 0.03,
+                                    ),
+                                    textAlign: TextAlign.center,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+
+          Expanded(
+            child: InkWell(
+              onTap: () {
+                print("Report");
+              },
+              child: Container(
+                width: screenSize.width * 0.6,
+                margin: EdgeInsets.only(bottom: screenSize.height * 0.01),
+                decoration: BoxDecoration(
+                  color: Colors.red[600],
+                  borderRadius: BorderRadius.all(
+                    Radius.circular(screenSize.width * 0.05),
+                  ),
+                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    Icon(
+                      Icons.report,
+                      size: screenSize.width * 0.05,
+                    ),
+                    SizedBox(
+                      width: screenSize.width * 0.02,
+                    ),
+                    Text(
+                      "Report this content",
+                      style: TextStyle(
+                        fontSize: screenSize.width * 0.04,
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          )
+        ],
+      ),
+    ),
+  );
+}
+
+onWhatsAppPressed(String data) {
+  SocialShare.shareWhatsapp("$data").then((data) {
+    print(data);
+  });
 }

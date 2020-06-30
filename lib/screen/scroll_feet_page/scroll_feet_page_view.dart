@@ -4,22 +4,33 @@ import 'package:instagramxflutter/helper/icon/icon_data.dart';
 import 'package:instagramxflutter/screen/detail_feet/detail_feet.dart';
 import 'package:instagramxflutter/screen/home_page/widgets/card-component.dart';
 import 'package:instagramxflutter/widgets/route_animation.dart';
+import 'package:instagramxflutter/widgets/shimmer.dart';
 import './scroll_feet_page_view_model.dart';
 
 class ScrollFeetPageView extends ScrollFeetPageViewModel {
   @override
   Widget build(BuildContext context) {
+    final screenSize = MediaQuery.of(context).size;
     return SafeArea(
       bottom: false,
       right: false,
       left: false,
       child: Scaffold(
         appBar: AppBar(
-          title: Text("Explore"),
+          title: Text(
+            "Explore",
+            style: TextStyle(
+              fontSize: screenSize.width * 0.05,
+            ),
+          ),
+          centerTitle: false,
           primary: false,
         ),
         body: allImageData.length > 0
             ? ListView.builder(
+                padding: EdgeInsets.only(
+                  top: screenSize.height * 0.02,
+                ),
                 itemCount: allImageData.length,
                 itemBuilder: (context, i) {
                   return GestureDetector(
@@ -42,15 +53,21 @@ class ScrollFeetPageView extends ScrollFeetPageViewModel {
                   );
                 },
               )
-            : Center(
-                child: CircularProgressIndicator(),
+            : ListView(
+                padding: EdgeInsets.only(
+                  top: screenSize.height * 0.02,
+                ),
+                children: <Widget>[
+                  shimmerHome(context),
+                  shimmerHome(context),
+                ],
               ),
       ),
     );
   }
 
   Widget datafeet(BuildContext context, data) {
-    var screenSize = MediaQuery.of(context).size;
+    final screenSize = MediaQuery.of(context).size;
     return Container(
       margin: EdgeInsets.only(
         left: screenSize.width * 0.06,
@@ -78,7 +95,9 @@ class ScrollFeetPageView extends ScrollFeetPageViewModel {
           ),
           Expanded(
             child: Container(
-              margin: EdgeInsets.only(left: screenSize.width * 0.05),
+              margin: EdgeInsets.only(
+                left: screenSize.width * 0.05,
+              ),
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,

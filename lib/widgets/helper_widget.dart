@@ -11,5 +11,3 @@ toastMessage(text, color) {
       textColor: Colors.white,
       fontSize: 14.0);
 }
-
-
