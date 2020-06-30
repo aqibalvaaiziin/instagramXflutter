@@ -40,4 +40,8 @@ class ProviderUser {
   static Future getUserProfile(username) async {
     return dio.get("/user/$username");
   }
+
+  static Future getAllUsers() async {
+    return dio.get("/user");
+  }
 }

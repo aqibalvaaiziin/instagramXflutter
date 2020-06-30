@@ -3,6 +3,8 @@ import 'package:flutter_redux/flutter_redux.dart';
 import 'package:instagramxflutter/providers/provider_image.dart';
 import 'package:instagramxflutter/redux/action/main_state_action.dart';
 import 'package:instagramxflutter/redux/model/app_state_model.dart';
+import 'package:instagramxflutter/screen/find_user_page/find_user_page.dart';
+import 'package:instagramxflutter/widgets/route_animation.dart';
 import 'package:redux/redux.dart';
 import './feet_page.dart';
 
@@ -18,6 +20,10 @@ abstract class FeetPageViewModel extends State<FeetPage> {
     {"text": "Art"},
     {"text": "Style"},
   ];
+
+  gotToFindUser() {
+    Navigator.of(context).push(routeToV(FindUserPage()));
+  }
 
   Future initAllImage() async {
     ProviderImage.getAllImage().then((value) {

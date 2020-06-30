@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:instagramxflutter/helper/preferences/preferences.dart';
-import 'package:instagramxflutter/providers/provider_image.dart';
+import 'package:instagramxflutter/providers/provider_user.dart';
 import 'package:instagramxflutter/redux/action/main_state_action.dart';
 import 'package:instagramxflutter/redux/model/app_state_model.dart';
 import 'package:redux/redux.dart';
@@ -12,13 +12,13 @@ abstract class NavigatorPageViewModel extends State<NavigatorPage> {
   PreferencesData preferencesData = PreferencesData();
   Store<AppState> store;
 
-  Future initImageByFollowing() async {
-    ProviderImage.getDataImageByFollow().then((value) {
+  Future initAllUser() async {
+    ProviderUser.getAllUsers().then((value) {
       List jsonObject = value.data;
       store.dispatch(
-        SetImageByFollowing(imageByFollowing: List.from(jsonObject)),
+        SetUsers(users: List.from(jsonObject)),
       );
-    }).catchError((err) => print("ImageByFollowing : ${err.toString()}"));
+    }).catchError((err) => print("users : ${err.toString()}"));
   }
 
   @override
@@ -31,7 +31,7 @@ abstract class NavigatorPageViewModel extends State<NavigatorPage> {
         });
       });
       store = StoreProvider.of<AppState>(context);
-      await initImageByFollowing();
+      await initAllUser();
     });
   }
 }

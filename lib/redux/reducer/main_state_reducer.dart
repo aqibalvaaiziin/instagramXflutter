@@ -20,6 +20,10 @@ MainState _setMainState(MainState state, action) {
     return state.copyWith(video: action.video);
   } else if (action is SetVideoComment) {
     return state.copyWith(videoComment: action.videoComment);
+  } else if (action is SetUsers) {
+    return state.copyWith(users: action.users);
+  } else if (action is SetUserFinded) {
+    return state.copyWith(userFinded: action.userFinded);
   }
   return state;
 }

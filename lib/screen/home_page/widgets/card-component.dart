@@ -33,10 +33,11 @@ cardHeader(BuildContext context, data) {
                   decoration: BoxDecoration(
                     shape: BoxShape.circle,
                     image: DecorationImage(
-                        image: NetworkImage(
-                          data['user']['image'],
-                        ),
-                        fit: BoxFit.cover),
+                      image: NetworkImage(
+                        data['user']['image'],
+                      ),
+                      fit: BoxFit.cover,
+                    ),
                   ),
                 ),
                 SizedBox(width: screenSize.width * 0.02),
@@ -215,8 +216,7 @@ Future shareModal(BuildContext context, imageUser, username, dataShare) async {
                         onTap: () {
                           print(DataShare.dataShare[i]['name']);
                           if (i == 0 || i == 1) {
-                            onWhatsAppPressed(
-                                "$dataShare");
+                            onWhatsAppPressed("$dataShare");
                           }
                         },
                         child: Center(

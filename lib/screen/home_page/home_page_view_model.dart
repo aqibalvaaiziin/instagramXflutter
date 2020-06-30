@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:instagramxflutter/providers/provider_image.dart';
@@ -8,7 +10,6 @@ import './home_page.dart';
 import 'package:collection/collection.dart';
 
 abstract class HomePageViewModel extends State<HomePage> {
-  bool isfav = false;
   bool isbooked = false;
   Function equals = const ListEquality().equals;
   bool contains = false;
@@ -16,7 +17,8 @@ abstract class HomePageViewModel extends State<HomePage> {
 
   Future initImageByFollowing() async {
     ProviderImage.getDataImageByFollow().then((value) {
-      List jsonObject = value.data;
+      List jsonObject = jsonDecode(jsonEncode(value.data));
+      print(jsonObject.toString());
       store.dispatch(
         SetImageByFollowing(imageByFollowing: List.from(jsonObject)),
       );
@@ -37,4 +39,3 @@ abstract class HomePageViewModel extends State<HomePage> {
     super.dispose();
   }
 }
-

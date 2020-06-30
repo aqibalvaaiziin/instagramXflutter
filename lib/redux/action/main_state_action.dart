@@ -32,3 +32,13 @@ class SetVideoComment {
   final List videoComment;
   SetVideoComment({this.videoComment});
 }
+
+class SetUsers {
+  final List users;
+  SetUsers({this.users});
+}
+
+class SetUserFinded {
+  final List userFinded;
+  SetUserFinded({this.userFinded});
+}

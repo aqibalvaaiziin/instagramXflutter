@@ -165,7 +165,7 @@ class HomePageView extends HomePageViewModel {
                                         likes: item['like'],
                                         image: item['imageLink'],
                                         caption: item['caption'],
-                                        view: item['view'],
+                                        view: item['view'], 
                                       ),
                                     ),
                                   );
@@ -245,14 +245,12 @@ class HomePageView extends HomePageViewModel {
                       children: <Widget>[
                         InkWell(
                           child: CustomIcon.favourite(
-                            statusIcon: isfav,
+                            statusIcon: data['isLiked'],
                             size: screenSize.width * 0.055,
-                            statusColor: isfav,
+                            statusColor: data['isLiked'],
                           ),
                           onTap: () {
-                            setState(() {
-                              isfav = !isfav;
-                            });
+                            
                           },
                         ),
                         SizedBox(width: screenSize.width * 0.015),

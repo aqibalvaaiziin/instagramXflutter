@@ -57,4 +57,18 @@ class ProviderImage {
   }
 
 //Post Image
+
+// Put Image
+  static Future likeContentImage(String id) async {
+    String token = await preferencesData.getToken();
+    dio.options.headers['Authorization'] = "bearer $token";
+    return await dio.put("/image/like/$id");
+  }
+  
+  static Future unlikeContentImage(String id) async {
+    String token = await preferencesData.getToken();
+    dio.options.headers['Authorization'] = "bearer $token";
+    return await dio.put("/image/unlike/$id");
+  }
+// Put Image
 }

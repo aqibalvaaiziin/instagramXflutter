@@ -52,8 +52,10 @@ class ProfilePageView extends ProfilePageViewModel {
                         slivers: <Widget>[
                           SliverAppBar(
                             automaticallyImplyLeading:
-                                widget.isMe ? false : true,
-                            title: widget.isMe && state.imageProfile.length > 0
+                                widget.isMe && widget.fromSearch == false ? false : true,
+                            title: widget.isMe &&
+                                    state.imageProfile.length > 0 &&
+                                    widget.fromSearch == false
                                 ? dataTitle(
                                     context,
                                     dataOffset > screenSize.height * 0.2,

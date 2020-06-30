@@ -22,6 +22,7 @@ class NavigatorPageView extends NavigatorPageViewModel {
             ProfilePage(
               username: username,
               isMe: true,
+              fromSearch: false,
             ),
           ],
         ),

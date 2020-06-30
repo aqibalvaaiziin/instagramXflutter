@@ -9,6 +9,8 @@ class MainState {
   final List imageComment;
   final List video;
   final List videoComment;
+  final List users;
+  final List userFinded;
 
   MainState({
     @required this.imageByFollowing,
@@ -18,6 +20,8 @@ class MainState {
     @required this.imageComment,
     @required this.video,
     @required this.videoComment,
+    @required this.users,
+    @required this.userFinded,
   });
 
   factory MainState.initial() {
@@ -29,6 +33,8 @@ class MainState {
       imageComment: [],
       video: [],
       videoComment: [],
+      users: [],
+      userFinded: [],
     );
   }
 
@@ -40,6 +46,8 @@ class MainState {
     List imageComment,
     List video,
     List videoComment,
+    List users,
+    List userFinded,
   }) {
     return MainState(
       imageByFollowing: imageByFollowing ?? this.imageByFollowing,
@@ -49,6 +57,8 @@ class MainState {
       imageComment: imageComment ?? this.imageComment,
       video: video ?? this.video,
       videoComment: videoComment ?? this.videoComment,
+      users: users ?? this.users,
+      userFinded: userFinded ?? this.userFinded,
     );
   }
 
@@ -63,7 +73,9 @@ class MainState {
           imageProfile == other.imageProfile &&
           imageComment == other.imageComment &&
           video == other.video &&
-          videoComment == other.videoComment;
+          videoComment == other.videoComment &&
+          users == other.users &&
+          userFinded == other.userFinded;
 
   @override
   int get hashCode =>
@@ -73,5 +85,7 @@ class MainState {
       imageProfile.hashCode ^
       imageComment.hashCode ^
       video.hashCode ^
-      videoComment.hashCode;
+      videoComment.hashCode ^
+      users.hashCode ^
+      userFinded.hashCode;
 }
